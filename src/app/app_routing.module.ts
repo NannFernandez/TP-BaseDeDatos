@@ -3,22 +3,33 @@ import { Routes, RouterModule } from '@angular/router'
 import { BotonesSuperioresComponent } from './botonesSuperiores/botonesSuperiores.component';
 import { GestionArchivosComponent } from './GestionArchivos/GestionArchivos.component';
 import { AppComponent } from './app.component';
+import { BotoneraComponent } from './botonera/botonera.component';
+import { AbmComponent } from './abm/abm.component';
+import { AgregarModificarComponent } from './agregar-modificar/agregar-modificar.component';
 
 
 export const routes: Routes = [
-  { path: '', redirectTo:'', pathMatch:'full' },
-  { path: 'GestionDeArchivo', component: GestionArchivosComponent},
-  { path: '**', redirectTo: '/listaTareas', pathMatch: 'full' },
-]
 
+    { path: 'botonera', component: BotoneraComponent},
+    { path: 'abm', component: AbmComponent},
+    { path: 'agregar', component: AgregarModificarComponent},
+    { path: '**', redirectTo: '/botonera', pathMatch: 'full' }
+                                               
+  
+ 
+]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
 export const routingComponents = [
   BotonesSuperioresComponent,
   GestionArchivosComponent,
+  BotoneraComponent,
+  AbmComponent,
+  AgregarModificarComponent,
   AppComponent 
 
 ]
