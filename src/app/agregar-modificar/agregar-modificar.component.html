@@ -1,1 +1,49 @@
-<p>asdasd</p>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Gestión archivos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+    
+        <div class="modal-body">
+            <div class="md-form">
+                <input type="text" id="form1" class="form-control">
+                <label for="form1">Titulo</label>
+            </div>
+
+            <select class="browser-default custom-select">
+                <option selected>Extension</option>
+                <option value="1">pdf</option>
+                <option value="2">wave</option>
+                <option value="3">txt</option>
+              </select><br><br>
+ 
+            <select class="browser-default custom-select">
+                <option selected>Categoria</option>
+                <option value="1">Comedia</option>
+                <option value="2">Entretenimiento</option>
+                <option value="3">Jazz</option>
+              </select><br><br>
+
+              <div class="form-group row">
+                <label for="example-date-input" class="col-2 col-form-label">Fecha</label>
+                <div class="col-10">
+                  <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                </div><br><br><br>
+
+            <div class="form-group" align="center">
+                <label for="ejemplo_archivo_1">Adjuntar un archivo</label>
+                <input type="file" id="ejemplo_archivo_1">
+            </div>
+        </div>
+      
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-danger">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>

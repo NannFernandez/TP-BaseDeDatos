@@ -13,6 +13,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule } from '@angular/forms';
 import { AbmComponent } from './abm/abm.component';
 import { AgregarModificarComponent } from './agregar-modificar/agregar-modificar.component';
+import { ModalConfirmacionComponent } from './modal-confirmacion/modal-confirmacion.component';
 
 
 
@@ -24,13 +25,14 @@ import { AgregarModificarComponent } from './agregar-modificar/agregar-modificar
       routingComponents,
       BotoneraComponent,
       AbmComponent,
-      AgregarModificarComponent
+      AgregarModificarComponent,
+      ModalConfirmacionComponent
    ],
    imports: [
       BrowserModule,
       CommonModule,
       FormsModule,
-      //permitebindingbidireccional\\nMDBBootstrapModule.forRoot(),
+      //permitebindingbidireccional\\\\nMDBBootstrapModule.forRoot(),
       AppRoutingModule,
       HttpClientModule
    ],
