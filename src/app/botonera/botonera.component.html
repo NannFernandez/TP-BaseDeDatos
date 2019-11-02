@@ -1,21 +1,21 @@
 <br><br>
 <div class="caja algin-center fondo-blur" align="center">
   <div>
-    <button type="button" class=" btn aqua-gradient">
+    <a [routerLink]="[ '/abm' ]"> <button type="button"class="btn aqua-gradient">
       Gestión de archivos
-    </button>
+    </button></a>
 
-    <button type="button" class="btn aqua-gradient">
+    <a [routerLink]="[ '/descarga' ]"> <button type="button" class="btn aqua-gradient">
       Datos De Descargas
-    </button>
+    </button></a>
   </div>
   
   <div>
-    <button type="button" class="btn aqua-gradient">
+    <a [routerLink]="[ '/encuesta' ]"><button type="button" class="btn aqua-gradient">
         Datos De Encuestas
-    </button>
-    <button type="button" class="btn aqua-gradient">
+    </button></a>
+    <a [routerLink]="[ '/categoria' ]"><button type="button" class="btn aqua-gradient">
       Datos De Categorias
-    </button></div>
+    </button></a></div>
 </div>
 <!-- Falta alinear bien los botones -->

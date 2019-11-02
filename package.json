@@ -19,14 +19,15 @@
     "@angular/platform-browser": "~8.2.11",
     "@angular/platform-browser-dynamic": "~8.2.11",
     "@angular/router": "~8.2.11",
-    "bootstrap": "^4.3.1",
-    "rxjs": "~6.4.0",
-    "tslib": "^1.10.0",
-    "zone.js": "~0.9.1",
     "@fortawesome/fontawesome-free": "^5.11.1",
     "@ng-bootstrap/ng-bootstrap": "^5.1.1",
+    "@types/jquery": "^3.3.31",
     "angular-bootstrap-md": "^8.3.0",
-    "mdbootstrap": "^4.8.10"
+    "bootstrap": "^4.3.1",
+    "mdbootstrap": "^4.8.10",
+    "rxjs": "~6.4.0",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.13",

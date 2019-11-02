@@ -1,0 +1,60 @@
+<!-- Falta ordenar bien -->
+
+<div class="">
+  <label  style="margin:5px;" >Criterio de busqueda</label>
+  <select class="browser-default  mdb-select md-form colorful-select dropdown-primar">
+    <option selected> </option>
+    <option value="1">Edad media ascendente</option>
+    <option value="2">Edad media descendente</option>
+    <option value="3">Transf. media ascendente</option>
+    <option value="4">Transf. media descendente</option>
+   
+</select>
+  <div>
+  <label  style="margin:5px;" >Cantidad de registros</label>
+    <div class="def-number-input number-input safari_only">
+    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+    <input class="quantity" min="0" name="quantity" value="1" type="number">
+    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button></div>
+  </div>
+  </div>
+
+  
+  <div class="table-wrapper-scroll-y my-custom-scrollbar">
+  
+    <table class="table table-bordered table-striped mb-0">
+      <thead>
+        <tr>
+          <th scope="col">Categoria</th>
+          <th scope="col">Edad media</th>
+          <th scope="col">Transf. media</th>
+          <th scope="col">Porcentaje x categoria</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Entretenimiento</th>
+          <td>25.5</td>
+          <td>180.5</td>
+          <td>30</td>
+          
+        </tr>
+        <tr>
+          <th scope="row">Musica Clasica</th>
+          <td>25.5</td>
+          <td>180.5</td>
+          <td>30</td>
+        </tr>
+        <tr>
+          <th scope="row">Drama</th>
+          <td>25.5</td>
+          <td>180.5</td>
+          <td>30</td>
+        </tr>
+        <tr>
+        
+      </tbody>
+    </table>
+  
+  </div>

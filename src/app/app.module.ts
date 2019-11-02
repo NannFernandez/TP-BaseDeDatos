@@ -14,6 +14,9 @@ import { FormsModule } from '@angular/forms';
 import { AbmComponent } from './abm/abm.component';
 import { AgregarModificarComponent } from './agregar-modificar/agregar-modificar.component';
 import { ModalConfirmacionComponent } from './modal-confirmacion/modal-confirmacion.component';
+import { DatosDescargaComponent } from './datos-descarga/datos-descarga.component';
+import { DatosCategoriaComponent } from './datos-categoria/datos-categoria.component';
+import { DatosEncuestaComponent } from './datos-encuesta/datos-encuesta.component';
 
 
 
@@ -26,13 +29,16 @@ import { ModalConfirmacionComponent } from './modal-confirmacion/modal-confirmac
       BotoneraComponent,
       AbmComponent,
       AgregarModificarComponent,
-      ModalConfirmacionComponent
+      ModalConfirmacionComponent,
+      DatosDescargaComponent,
+      DatosCategoriaComponent,
+      DatosEncuestaComponent
    ],
    imports: [
       BrowserModule,
       CommonModule,
       FormsModule,
-      //permitebindingbidireccional\\\\nMDBBootstrapModule.forRoot(),
+      //permitebindingbidireccional\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nMDBBootstrapModule.forRoot(),
       AppRoutingModule,
       HttpClientModule
    ],

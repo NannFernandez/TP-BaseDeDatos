@@ -1,0 +1,80 @@
+
+<!-- Falta ordenar bien -->
+
+<div class="">
+<label  style="margin:5px;" >Criterio de busqueda</label>
+<select class="browser-default  mdb-select md-form colorful-select dropdown-primar">
+  <option selected> </option>
+  <option value="1">Velocidad transf. ascendente</option>
+  <option value="2">Velocidad transf. descendente</option>
+
+  
+
+</select>
+<div>
+<label  style="margin:5px;" >Cantidad de registros</label>
+  <div class="def-number-input number-input safari_only">
+  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+  <input class="quantity" min="0" name="quantity" value="1" type="number">
+  <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button></div>
+</div>
+</div>
+
+<div class= "  ">
+<div class="">
+<label for="example-date-input" class="col-2 col-form-label">Fecha Desde</label>
+                <div class="form-group col-md-6">
+                  <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                </div>
+                <label for="example-date-input" class="col-2 col-form-label">Fecha Hasta</label>
+                <div class="form-group col-md-6">
+                  <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                </div></div>
+
+</div>
+
+
+
+
+
+
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+  <table class="table table-bordered table-striped mb-0">
+    <thead>
+      <tr>
+        <th scope="col">Titulo</th>
+        <th scope="col">Extension</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Velocidad transf.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Una llamada del destino</th>
+        <td>pdf</td>
+        <td>Terror</td>
+        <td>15/12/2000</td>
+        <td>200</td>
+      </tr>
+      <tr>
+        <th scope="row">La wachicolera</th>
+        <td>mp3</td>
+        <td>Cumbia</td>
+        <td>12/12/2012</td>
+        <td>200</td>
+      </tr>
+      <tr>
+        <th scope="row">Una noche distinta</th>
+        <td>txt</td>
+        <td>Suspenso</td>
+        <td>15/12/2003</td>
+        <td>200</td>
+      </tr>
+      <tr>
+      
+    </tbody>
+  </table>
+
+</div>
