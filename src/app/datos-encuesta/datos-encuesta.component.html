@@ -4,10 +4,10 @@
   <label  style="margin:5px;" >Criterio de busqueda</label>
   <select class="browser-default  mdb-select md-form colorful-select dropdown-primar">
     <option selected> </option>
-    <option value="1">Edad media ascendente</option>
-    <option value="2">Edad media descendente</option>
-    <option value="3">Transf. media ascendente</option>
-    <option value="4">Transf. media descendente</option>
+    <option value="1">Media puntaje ascendente</option>
+    <option value="2">Media puntaje descendente</option>
+    <option value="3">Cantidad Encuestas ascendente</option>
+    <option value="4">Cantidad Encuestas descendente</option>
    
 </select></div>
 
@@ -15,12 +15,26 @@
   <label  style="margin:5px;" >Categoria</label>
   <select class="browser-default  mdb-select md-form colorful-select dropdown-primar">
     <option selected> </option>
+    <option value="1">Todas</option>
     <option value="1">Drama</option>
     <option value="2">Comedia</option>
     <option value="3">Musica clasica</option>
     <option value="4">Jazz</option>
    
 </select></div>
+
+<div class= "  ">
+  <div class="">
+  <label for="example-date-input" class="col-2 col-form-label">Fecha Desde</label>
+                  <div class="form-group col-md-6">
+                    <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                  </div>
+                  <label for="example-date-input" class="col-2 col-form-label">Fecha Hasta</label>
+                  <div class="form-group col-md-6">
+                    <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                  </div></div>
+  
+  </div>
 
   <div>
   <label  style="margin:5px;" >Cantidad de registros</label>
@@ -30,7 +44,7 @@
     <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button></div>
   </div>
   
-
+  <button type="button" class="btn btn-success">Buscar</button>
   
   <div class="table-wrapper-scroll-y my-custom-scrollbar">
   
@@ -38,6 +52,7 @@
       <thead>
         <tr>
           <th scope="col">Titulo</th>
+          <th scope="col">Fecha</th>
           <th scope="col">Categoria</th>
           <th scope="col">Media puntaje</th>
           <th scope="col">Cantidad de encuestas</th>
@@ -47,6 +62,7 @@
       <tbody>
         <tr>
           <th scope="row">Laberinto de la fauna</th>
+          <td>2019-12-30</td>
           <td>Misterio</td>
           <td>8.75</td>
           <td>30</td>
@@ -54,12 +70,14 @@
         </tr>
         <tr>
           <th scope="row">Musica de los cielos</th>
+          <td>2019-12-30</td>
           <td>Musica Clasica</td>
           <td>0.5</td>
           <td>4</td>
         </tr>
         <tr>
-          <th scope="row">Dramaturgo</th>
+          <th scope="row">La wachicolera</th>
+          <td>2019-12-30</td>
           <td>Drama</td>
           <td>1.5</td>
           <td>30</td>
