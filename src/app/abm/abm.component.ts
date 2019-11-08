@@ -10,7 +10,7 @@ export class AbmComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    
+
   }
 
 }
