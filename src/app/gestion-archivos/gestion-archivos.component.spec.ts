@@ -1,9 +1,6 @@
-/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
-import { GestionArchivosComponent } from './GestionArchivos.component';
+import { GestionArchivosComponent } from './gestion-archivos.component';
 
 describe('GestionArchivosComponent', () => {
   let component: GestionArchivosComponent;

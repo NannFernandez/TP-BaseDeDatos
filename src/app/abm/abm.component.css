@@ -1,0 +1,21 @@
+.contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  width: 200px;
+}
+
+.lapicito {
+  visibility: hidden;
+}
+
+td.editable:hover .lapicito {
+  visibility: visible;
+}
+
+.editable:hover {
+  cursor: pointer;
+}

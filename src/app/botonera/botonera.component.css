@@ -1,3 +1,15 @@
-p {
-    border: red 5px solid;
-  }
+.contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.caja {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.btn {
+  font-size: 1em;
+  width: 200px;
+}

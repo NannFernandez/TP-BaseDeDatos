@@ -1,5 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Archivo } from '../domain/archivo';
+import { ArchivosService } from '../services/archivos.service';
+import { Router } from '@angular/router';
+import { extensiones } from '../services/extensiones.service';
+import { categorias } from '../services/categorias.service';
+
+function mostrarError(component, error) {
+  console.log('error', error)
+  component.errors.push(error.error)
+}
 
 @Component({
   selector: 'app-agregar-modificar',
@@ -8,22 +18,45 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AgregarModificarComponent implements OnInit {
 
-  ngOnInit() {
+  @Input() archivo: Archivo;
+
+  async ngOnInit() {
+    try {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false
+    } catch (error) {
+      mostrarError(this, error)
+    }
   }
+
+  ngOnChanges() {
+    if (this.archivo) {
+      console.log(this.archivo)
+      this.extensionSeleccionada = this.archivo.extension
+      this.categoriaSeleccionada = this.archivo.categoria
+    }
+  }
+
+  extensiones: any = extensiones
+  categorias: any = categorias
+  extensionSeleccionada: number = 0
+  categoriaSeleccionada: number = 0
+  inputArchivo: any = null
 
   fileData: File = null;
   previewUrl: any = null;
   fileUploadProgress: string = null;
   uploadedFilePath: string = null;
-  constructor(private http: HttpClient) { }
 
-  fileProgress(fileInput: any) {
-    this.fileData = <File>fileInput.target.files[0];
+  constructor(private http: HttpClient, private archivosService: ArchivosService, private router: Router) { }
+
+  fileProgress() {
+    console.log(this.inputArchivo)
+    this.fileData = <File>this.inputArchivo.target.files[0];
     this.preview();
   }
 
   preview() {
-    // Show preview 
+    // Show preview
     var mimeType = this.fileData.type;
     if (mimeType.match(/image\/*/) == null) {
       return;
@@ -39,7 +72,7 @@ export class AgregarModificarComponent implements OnInit {
   onSubmit() {
     const formData = new FormData();
     formData.append('file', this.fileData);
-    this.http.post('url/to/your/api', formData)
+    this.http.post('https://transfer.sh/', formData)
       .subscribe((res: any) => {
         console.log(res);
         this.uploadedFilePath = res.data.filePath;

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-GestionArchivos',
-  templateUrl: './GestionArchivos.component.html',
-  styleUrls: ['./GestionArchivos.component.css']
+  selector: 'app-gestion-archivos',
+  templateUrl: './gestion-archivos.component.html',
+  styleUrls: ['./gestion-archivos.component.css']
 })
 export class GestionArchivosComponent implements OnInit {
 

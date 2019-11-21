@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-botonesSuperiores',
-  templateUrl: './botonesSuperiores.component.html',
-  styleUrls: ['./botonesSuperiores.component.css']
+  selector: 'app-botones-superiores',
+  templateUrl: './botones-superiores.component.html',
+  styleUrls: ['./botones-superiores.component.css']
 })
 export class BotonesSuperioresComponent implements OnInit {
 

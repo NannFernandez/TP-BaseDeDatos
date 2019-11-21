@@ -1,49 +1,59 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Gestión archivos</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-    
-        <div class="modal-body">
-            <div class="md-form">
-                <input type="text" id="form1" class="form-control">
-                <label for="form1">Titulo</label>
-            </div>
+<div class="modal fade" id="amModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-            <select class="browser-default custom-select">
-                <option selected>Extension</option>
-                <option value="1">pdf</option>
-                <option value="2">wave</option>
-                <option value="3">txt</option>
-              </select><br><br>
- 
-            <select class="browser-default custom-select">
-                <option selected>Categoria</option>
-                <option value="1">Comedia</option>
-                <option value="2">Entretenimiento</option>
-                <option value="3">Jazz</option>
-              </select><br><br>
+  <div class="modal-dialog cascading-modal" role="document">
 
-              <div class="form-group row">
-                <label for="example-date-input" class="col-2 col-form-label">Fecha</label>
-                <div class="col-10">
-                  <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
-                </div><br><br><br>
+    <div class="modal-content">
 
-            <div class="form-group" align="center">
-                <label for="ejemplo_archivo_1">Adjuntar un archivo</label>
-                <input type="file" id="ejemplo_archivo_1">
-            </div>
-        </div>
-      
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-danger" (click)="onSubmit()">Guardar</button>
-        </div>
+      <div class="modal-header primary-color white-text">
+        <h4 class="title">
+          <i class="fa fa-pencil-alt"></i> Gestión de archivos</h4>
+        <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
       </div>
+
+      <div class="modal-body">
+
+        <div>
+          <label for="materialFormNameModalEx1">Título</label>
+          <input value="{{archivo?.titulo}}" type="text" id="materialFormNameModalEx1" class="form-control form-control-sm">
+        </div>
+
+        <div class="md-form form-sm">
+          <select [(ngModel)]="extensionSeleccionada" class="browser-default custom-select">
+            <option *ngFor="let item of extensiones" [ngValue]="item.id">{{item.extension}}</option>
+          </select>
+        </div>
+
+        <div class="md-form form-sm">
+          <select [(ngModel)]="categoriaSeleccionada" class="browser-default custom-select">
+            <option *ngFor="let item of categorias" [ngValue]="item.id">{{item.nombre}}</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="inputMDEx">Fecha</label>
+          <input value="{{archivo?.fecha}}" type="date" id="inputMDEx" class="form-control form-control-sm">
+        </div>
+
+        <br/>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroupFileAddon01">Subir</span>
+          </div>
+          <div class="custom-file">
+            <input [(ngModel)]="inputArchivo" (change)="fileProgress()" type="file" class="custom-file-input" id="inputArchivo" aria-describedby="inputGroupFileAddon01">
+            <label class="custom-file-label" for="inputArchivo">Seleccionar archivo</label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="onSubmit()">Guardar</button>
+        <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+      </div>
+
     </div>
   </div>
+</div>

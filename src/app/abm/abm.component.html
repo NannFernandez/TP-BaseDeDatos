@@ -1,53 +1,37 @@
 <br>
-<div>
-  <div class=" float-left " style="margin-left:250px;">
+<div class="contenedor">
+  <div>
     <table mdbTable class="z-depth-1 table-bordered table-sm">
       <thead>
         <tr>
-          <th scope="row">Titulo</th>
-          <th scope="row">Fecha </th>
-          <th scope="row">Extension</th>
-        </tr>
-        <tr>
-          <td> Un paraiso en la tierra </td>
-          <td> 28/08/89 </td>
-          <td> pdf </td>
-        </tr>
-        <tr>
-          <td> Un paraiso en la tierra </td>
-          <td> 28/08/89 </td>
-          <td> pdf </td>
-        </tr>
-        <tr>
-          <td> Un paraiso en la tierra </td>
-          <td> 28/08/89 </td>
-          <td> pdf </td>
+          <th scope="row">Título</th>
+          <th scope="row">Fecha</th>
+          <th scope="row">Extensión</th>
         </tr>
       </thead>
       <tbody>
+        <tr *ngFor="let archivo of archivos" id=archivo-{{archivo.id}} (click)="seleccionarArchivo(archivo.id)" data-toggle="modal" data-target="#amModal">
+          <td class="editable"><i class="far fa-edit lapicito"></i> {{archivo.titulo}}</td>
+          <td>{{archivo.fecha}}</td>
+          <td>{{getExtension(archivo.extension)}}</td>
+        </tr>
       </tbody>
     </table>
   </div>
 
-  <div class="float-center" style="margin-right:200px;">
-
+  <div>
     <div>
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+      <button type="button" class="btn btn-success" (click)="seleccionarArchivo(null)" data-toggle="modal" data-target="#amModal">
         Agregar
       </button>
-      <app-agregar-modificar></app-agregar-modificar>
     </div>
     <div>
-      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
-        Modificar
-      </button>
-      <app-agregar-modificar></app-agregar-modificar>
-    </div>
-    <div>
-      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#borrarModal">
         Borrar
       </button>
-      <app-modal-confirmacion></app-modal-confirmacion>
-    </div> <!-- No funciona toma agregar modificar -->
+    </div>
   </div>
 </div>
+
+<app-agregar-modificar [archivo]="archivoSeleccionado"></app-agregar-modificar>
+<app-modal-confirmacion></app-modal-confirmacion>

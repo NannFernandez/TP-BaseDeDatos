@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Archivo } from '../domain/archivo';
+import { ArchivosService } from '../services/archivos.service';
+import { Router } from '@angular/router';
+import { extensiones } from '../services/extensiones.service';
+
+function mostrarError(component, error) {
+  console.log('error', error)
+  component.errors.push(error.error)
+}
 
 @Component({
   selector: 'app-abm',
@@ -7,10 +16,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AbmComponent implements OnInit {
 
-  constructor() { }
+  archivos: Archivo[] = []
+  archivoSeleccionado: Archivo = null
 
-  ngOnInit() {
+  constructor(private archivosService: ArchivosService, private router: Router) { }
 
+  async ngOnInit() {
+    try {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false
+      this.archivos = await this.archivosService.todosLosArchivos()
+    } catch (error) {
+      mostrarError(this, error)
+    }
+  }
+
+  async seleccionarArchivo(id: number) {
+    if (!id) {
+      this.archivoSeleccionado = null
+    }
+
+    this.archivoSeleccionado = await this.archivosService.getArchivo(id)
+  }
+
+  getExtension(id: number) {
+    const formato = extensiones.find((ext) => { return ext.id == id })
+    return formato.extension
   }
 
 }
