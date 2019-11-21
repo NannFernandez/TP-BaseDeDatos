@@ -5,6 +5,7 @@ import { ArchivosService } from '../services/archivos.service';
 import { Router } from '@angular/router';
 import { extensiones } from '../services/extensiones.service';
 import { categorias } from '../services/categorias.service';
+import { Categoria } from '../domain/categoria';
 
 function mostrarError(component, error) {
   console.log('error', error)
@@ -19,6 +20,20 @@ function mostrarError(component, error) {
 export class AgregarModificarComponent implements OnInit {
 
   @Input() archivo: Archivo;
+  categoriasUpdate:Categoria[] = [new Categoria(4,'Rock'),new Categoria(5,'Rap'),new Categoria(6,'Cumbia')]
+
+  agregarElemento (categoria: any){
+    this.categoriasUpdate.push(categoria)
+ }
+
+ eliminarElemento (categoria: any){
+  for (var _i = 0; _i < this.categoriasUpdate.length; _i++) {
+    if (this.categoriasUpdate[_i].id===categoria.id){
+      this.categoriasUpdate.splice(_i,1)
+
+    }
+}
+}
 
   async ngOnInit() {
     try {

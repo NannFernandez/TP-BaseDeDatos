@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatosCategoria } from '../domain/datosCategoria';
 
 @Component({
   selector: 'app-datos-categoria',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./datos-categoria.component.css']
 })
 export class DatosCategoriaComponent implements OnInit {
+  lista: DatosCategoria[]=[new DatosCategoria,new DatosCategoria,new DatosCategoria,new DatosCategoria,new DatosCategoria]
 
   constructor() { }
 

@@ -1,27 +1,29 @@
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <label><h4><b>Criterio de busqueda</b></h4></label> 
+      <select class="browser-default  mdb-select md-form colorful-select ">
+        <option selected> </option>
+        <option value="1">Velocidad transf. ascendente</option>
+        <option value="2">Velocidad transf. descendente</option>
+      </select>
+    </div>
 
-<!-- Falta ordenar bien -->
+    <div class="col-sm">
+      
 
-<div class="">
-<label  style="margin:5px;" >Criterio de busqueda</label>
-<select class="browser-default  mdb-select md-form colorful-select dropdown-primar">
-  <option selected> </option>
-  <option value="1">Velocidad transf. ascendente</option>
-  <option value="2">Velocidad transf. descendente</option>
-
-  
-
-</select>
-<div>
-<label  style="margin:5px;" >Cantidad de registros</label>
-  <div class="def-number-input number-input safari_only">
-  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-  <input class="quantity" min="0" name="quantity" value="1" type="number">
-  <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button></div>
-</div>
-</div>
-
-<button type="button" class="btn btn-success">Buscar</button>
-
+      <label style="margin:5px;"><h4><b>Cantidad de registros</b></h4></label>
+      <div class="def-number-input number-input safari_only">
+        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+        <input class="quantity" min="0" name="quantity" value="1" type="number">
+        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button></div>
+      
+      </div>
+      <div class="col-sm">
+      <button type="button" class="btn btn-success btn-lg">Buscar</button>
+    </div>
+  </div></div>
 
 
 
@@ -34,32 +36,16 @@
       <tr>
         <th scope="col">Titulo</th>
         <th scope="col">Extension</th>
-        <th scope="col">Categoria</th>
         <th scope="col">Velocidad transf.</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">Una llamada del destino</th>
-        <td>pdf</td>
-        <td>Terror</td>
-        <td>200</td>
+      <tr *ngFor="let item of lista;let indice=index">
+        <th>{{item.titulo}}</th>
+        <td>{{item.ext}}</td>
+        <td>{{item.vel}}</td>
       </tr>
-      <tr>
-        <th scope="row">La wachicolera</th>
-        <td>mp3</td>
-        <td>Cumbia</td>
-        <td>200</td>
-      </tr>
-      <tr>
-        <th scope="row">Una noche distinta</th>
-        <td>txt</td>
-        <td>Suspenso</td>
-        <td>200</td>
-      </tr>
-      <tr>
-      
-    </tbody>
+      </tbody>
   </table>
 
 </div>
