@@ -3,12 +3,18 @@ export class Archivo {
         public id?: number,
         public titulo?: string,
         public extension?: number,
-        public categoria?: number,
+        public categoria?: number[],
         public fecha?: string,
-    ) { }
+        ) { }
 
     static fromJson(archivoJSON): Archivo {
         return Object.assign(new Archivo(), archivoJSON)
+    }
+
+    toJSON(): any {
+        return {
+            ...this,
+        }
     }
 
     // contiene(palabra: string): boolean {
@@ -58,11 +64,5 @@ export class Archivo {
     // estaAsignada(): boolean {
     //     return !!this.asignatario
     // }
-
-    toJSON(): any {
-        return {
-            ...this,
-        }
-    }
 
 }

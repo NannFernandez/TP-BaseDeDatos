@@ -18,8 +18,12 @@ export class AbmComponent implements OnInit {
 
   archivos: Archivo[] = []
   archivoSeleccionado: Archivo = null
+  modalToggle: boolean = false
 
-  constructor(private archivosService: ArchivosService, private router: Router) { }
+  constructor(
+    private archivosService: ArchivosService,
+    private router: Router,
+  ) { }
 
   async ngOnInit() {
     try {
@@ -33,9 +37,9 @@ export class AbmComponent implements OnInit {
   async seleccionarArchivo(id: number) {
     if (!id) {
       this.archivoSeleccionado = null
+    } else {
+      this.archivoSeleccionado = await this.archivosService.getArchivo(id)
     }
-
-    this.archivoSeleccionado = await this.archivosService.getArchivo(id)
   }
 
   getExtension(id: number) {

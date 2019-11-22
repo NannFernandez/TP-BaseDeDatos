@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule } from '@angular/forms';
 import { ModalConfirmacionComponent } from './modal-confirmacion/modal-confirmacion.component';
+import { ModalModule } from './_modal/modal.module';
 
 @NgModule({
    declarations: [
@@ -19,7 +20,7 @@ import { ModalConfirmacionComponent } from './modal-confirmacion/modal-confirmac
       BrowserModule,
       CommonModule,
       FormsModule,
-      //permitebindingbidireccional\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nMDBBootstrapModule.forRoot(),
+      ModalModule,
       AppRoutingModule,
       HttpClientModule
    ],

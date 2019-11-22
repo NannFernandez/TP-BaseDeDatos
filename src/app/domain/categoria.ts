@@ -1,10 +1,16 @@
 export class Categoria {
-    id: number 
-    nombre: String='Musica Clasica'
+    constructor(
+        public id?: number,
+        public nombre?: string,
+        ) { }
 
-    constructor (_id: number, _nombre: String){
-        this.id=_id
-        this.nombre=_nombre
+    static fromJson(archivoJSON): Categoria {
+        return Object.assign(new Categoria(), archivoJSON)
+    }
 
+    toJSON(): any {
+        return {
+            ...this,
+        }
     }
 }

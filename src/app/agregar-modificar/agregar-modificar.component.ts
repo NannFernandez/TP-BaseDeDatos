@@ -19,21 +19,7 @@ function mostrarError(component, error) {
 })
 export class AgregarModificarComponent implements OnInit {
 
-  @Input() archivo: Archivo;
-  categoriasUpdate:Categoria[] = [new Categoria(4,'Rock'),new Categoria(5,'Rap'),new Categoria(6,'Cumbia')]
-
-  agregarElemento (categoria: any){
-    this.categoriasUpdate.push(categoria)
- }
-
- eliminarElemento (categoria: any){
-  for (var _i = 0; _i < this.categoriasUpdate.length; _i++) {
-    if (this.categoriasUpdate[_i].id===categoria.id){
-      this.categoriasUpdate.splice(_i,1)
-
-    }
-}
-}
+  @Input() archivo: Archivo
 
   async ngOnInit() {
     try {
@@ -45,16 +31,15 @@ export class AgregarModificarComponent implements OnInit {
 
   ngOnChanges() {
     if (this.archivo) {
-      console.log(this.archivo)
       this.extensionSeleccionada = this.archivo.extension
-      this.categoriaSeleccionada = this.archivo.categoria
+      this.categoriasSeleccionadas = this.archivo.categoria
     }
   }
 
   extensiones: any = extensiones
   categorias: any = categorias
   extensionSeleccionada: number = 0
-  categoriaSeleccionada: number = 0
+  categoriasSeleccionadas: number[] = []
   inputArchivo: any = null
 
   fileData: File = null;
@@ -62,7 +47,16 @@ export class AgregarModificarComponent implements OnInit {
   fileUploadProgress: string = null;
   uploadedFilePath: string = null;
 
-  constructor(private http: HttpClient, private archivosService: ArchivosService, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private archivosService: ArchivosService,
+    private router: Router
+  ) { }
+
+  categoriaChecked(id: number) {
+    console.log(id)
+    this.categoriasSeleccionadas.includes(id)
+  }
 
   fileProgress() {
     console.log(this.inputArchivo)

@@ -21,70 +21,36 @@
 
         <div class="md-form form-sm">
           <select [(ngModel)]="extensionSeleccionada" class="browser-default custom-select">
-            <option *ngFor="let item of extensiones" [ngValue]="item.id">{{item.extension}}</option>
-          </select>
-        </div>
-
-        <div class="md-form form-sm">
-          
-
-
-
-          <div class="md-form input-group mb-3">
-            <select [(ngModel)]="categoriaSeleccionada" class="browser-default custom-select">
-              <option *ngFor="let item of categorias" [ngValue]="item.id">{{item.nombre}}</option>
+              <option *ngFor="let item of extensiones" [ngValue]="item.id">{{item.extension}}</option>
             </select>
-          <div class="input-group-append">
-            <button mdbBtn color="default" size="md" class="m-0 px-3 py-2" type="button" id="button-addon2"
-              mdbWavesEffect (click)="agregarElemento(item)">+</button>
-          </div>
         </div>
-        
-        <table mdbTable mdbTableScroll scrollY="true" maxHeight="200" bordered="true">
-          <tbody>
-            <tr *ngFor="let item of categoriasUpdate; let i = index" >
-              <th scope="row" >
-                    <span>
-                      {{ item.nombre }}
-                    </span>
-                    <span class="float-right">
-                      <button mdbBtn color="danger" size="md" class="m-0 px-3 py-2" type="button"
-                      id="button-ele2" mdbWavesEffect (click)="eliminarElemento(item)"> X </button>
-                    </span>
-              </th>
-            </tr>
-          </tbody>
-        </table>
 
-
-
-
-
-
-          
+        <div *ngFor="let item of categorias">
+          <input type="checkbox" value="{{item.id}}" id="{{item.id}}" checked={{categoriaChecked(item.id)}}>
+          <label for="{{item.id}} ">{{item.nombre}}</label>
         </div>
 
         <div>
-          <label for="inputMDEx">Fecha</label>
-          <input value="{{archivo?.fecha}}" type="date" id="inputMDEx" class="form-control form-control-sm">
+          <label for="inputMDEx ">Fecha</label>
+          <input value="{{archivo?.fecha}} " type="date " id="inputMDEx " class="form-control form-control-sm ">
         </div>
 
         <br/>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroupFileAddon01">Subir</span>
+        <div class="input-group ">
+          <div class="input-group-prepend ">
+            <span class="input-group-text " id="inputGroupFileAddon01 ">Subir</span>
           </div>
-          <div class="custom-file">
-            <input [(ngModel)]="inputArchivo" (change)="fileProgress()" type="file" class="custom-file-input" id="inputArchivo" aria-describedby="inputGroupFileAddon01">
-            <label class="custom-file-label" for="inputArchivo">Seleccionar archivo</label>
+          <div class="custom-file ">
+            <input [(ngModel)]="inputArchivo " (change)="fileProgress() " type="file " class="custom-file-input " id="inputArchivo " aria-describedby="inputGroupFileAddon01 ">
+            <label class="custom-file-label " for="inputArchivo ">Seleccionar archivo</label>
           </div>
         </div>
 
       </div>
 
-      <div class="modal-footer">
-        <button class="btn btn-primary" (click)="onSubmit()">Guardar</button>
-        <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+      <div class="modal-footer ">
+        <button class="btn btn-primary " (click)="onSubmit() ">Guardar</button>
+        <button class="btn btn-danger " data-dismiss="modal ">Cancelar</button>
       </div>
 
     </div>
