@@ -18,10 +18,10 @@
       <LABEL>Criterio de busqueda </LABEL>
      <select class="browser-default custom-select " [(ngModel)]="tipoQuery">
          
-          <option value="EDAD_ASC">Media puntaje ascendente</option>
-          <option value="EDAD_DESC">Media puntaje descendente</option>
-          <option value="TRANSF_ASC">Cantidad Encuestas ascendente</option>
-          <option value="TRANSF_DESC">Cantidad Encuestas descendente</option>
+          <option value="PTJ_ASC">Media puntaje ascendente</option>
+          <option value="PTJ_DESC">Media puntaje descendente</option>
+          <option value="ENC_ASC">Cantidad Encuestas ascendente</option>
+          <option value="ENC_DESC">Cantidad Encuestas descendente</option>
         </select>
         <br>
         <div class="md-form">
@@ -31,7 +31,7 @@
 
          
     </div>
-    <div class="col-sm"><br><br><br><button type="sumbit" class="btn btn-success btn-lg" (click)=categorias()>Buscar</button></div>
+    <div class="col-sm"><br><br><br><button type="sumbit" class="btn btn-success btn-lg" (click)=encuestas()>Buscar</button></div>
   </div>
 
 </div>
@@ -41,8 +41,8 @@
       <thead>
         <tr>
           <th scope="col">Titulo</th>
+          <th scope="col">Extensión</th>
           <th scope="col">Fecha</th>
-          <th scope="col">Categoria</th>
           <th scope="col">Media puntaje</th>
           <th scope="col">Cantidad de encuestas</th>
 
@@ -52,9 +52,9 @@
 
         <tr *ngFor="let item of lista;let indice=index">
           <th>{{item.titulo}}</th>
-          <th>{{item.fecha}}</th>
-          <td>{{item.categoria}}</td>
-          <td>{{item.categoria}}</td>
+          <th>{{item.ext}}</th>
+          <td>{{item.fecha}}</td>
+          <td>{{item.mediaPuntaje}}</td>
           <td>{{item.cantEncuestas}}</td>
         </tr>
 

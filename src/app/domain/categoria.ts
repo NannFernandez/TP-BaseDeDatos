@@ -1,11 +1,14 @@
 export class Categoria {
-    constructor(
-        public id?: number,
-        public nombre?: string,
-        ) { }
+    idCategoria: String
+    descCategoria: String
 
-    static fromJson(archivoJSON): Categoria {
-        return Object.assign(new Categoria(), archivoJSON)
+    constructor(_id?: String, _desc?: String) {
+        this.idCategoria = _id
+        this.descCategoria = _desc
+    }
+
+    static fromJson(categoriaJson): Categoria {
+        return Object.assign(new Categoria(), categoriaJson)
     }
 
     toJSON(): any {

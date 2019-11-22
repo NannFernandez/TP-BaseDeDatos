@@ -3,6 +3,10 @@ import { Archivo } from '../domain/archivo';
 import { ArchivosService } from '../services/archivos.service';
 import { Router } from '@angular/router';
 import { extensiones } from '../services/extensiones.service';
+import { Contenido } from '../domain/contenido';
+import { Categoria } from '../domain/categoria';
+import { HttpClient } from '@angular/common/http';
+import { AbmService } from '../services/abm.service';
 
 function mostrarError(component, error) {
   console.log('error', error)
@@ -16,29 +20,30 @@ function mostrarError(component, error) {
 })
 export class AbmComponent implements OnInit {
 
-  archivos: Archivo[] = []
-  archivoSeleccionado: Archivo = null
+  archivos: any[] = []
+  archivoSeleccionado: Contenido = null
   modalToggle: boolean = false
+  contenidos: Contenido[]=[]
+  categorias: Categoria[]=[]
+  idBorrar: Contenido;
 
-  constructor(
-    private archivosService: ArchivosService,
-    private router: Router,
-  ) { }
+  constructor(private http: HttpClient, private abmService: AbmService,private router: Router) { }
 
   async ngOnInit() {
     try {
       this.router.routeReuseStrategy.shouldReuseRoute = () => false
-      this.archivos = await this.archivosService.todosLosArchivos()
+      this.contenidos = await this.abmService.contenidos()
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false
     } catch (error) {
       mostrarError(this, error)
     }
   }
 
-  async seleccionarArchivo(id: number) {
-    if (!id) {
-      this.archivoSeleccionado = null
+  async seleccionarArchivo(contenido: Contenido) {
+      if (contenido === null) {
+      this.archivoSeleccionado = new Contenido
     } else {
-      this.archivoSeleccionado = await this.archivosService.getArchivo(id)
+      this.archivoSeleccionado = contenido
     }
   }
 
@@ -46,5 +51,12 @@ export class AbmComponent implements OnInit {
     const formato = extensiones.find((ext) => { return ext.id == id })
     return formato.extension
   }
+ async borrar (contenido: Contenido){
+  
+    await this.abmService.borrarArchivo(contenido)   
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false
+    this.contenidos = await this.abmService.contenidos()
+    // no actualiza la vista
+   }
 
 }

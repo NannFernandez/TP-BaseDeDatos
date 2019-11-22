@@ -16,35 +16,42 @@
 
         <div>
           <label for="materialFormNameModalEx1">Título</label>
-          <input value="{{archivo?.titulo}}" type="text" id="materialFormNameModalEx1" class="form-control form-control-sm">
+          <input [(ngModel)]="contenido.titulo" type="text" id="materialFormNameModalEx1" class="form-control form-control-sm">
         </div>
-
-        <div class="md-form form-sm">
-          <select [(ngModel)]="extensionSeleccionada" class="browser-default custom-select">
+       <br>
+        <label for="materialFormNameModalEx1">Extensión</label>
+       
+           <select [(ngModel)]="contenido.extensionArchivo" class="browser-default custom-select">
+              <option selected>{{contenido.extensionArchivo}}</option>
               <option *ngFor="let item of extensiones" [ngValue]="item.id">{{item.extension}}</option>
             </select>
+            <br><br>
+       <div class="margenIzq">
+           <tr *ngFor="let categoria of categorias ; let i = index">
+            
+                <input type="checkbox" class="form-check-input" id="defaultUnchecked" name="cats" id="i">
+                <label class="form-check-label" for="defaultUnchecked">{{categoria.descCategoria}}</label>
+            
+        </tr>  </div>
+
+        <div> <br>
+          <label for="example-date-input" class="">Fecha Publicación</label>
+      <input class="form-control" type="date" value="contenido.fechaPublicacion" id="example-date-input" [(ngModel)]="contenido.fechaPublicacion"
+        min="{{desde}}" max="{{minimo}}">
         </div>
 
-        <div *ngFor="let item of categorias">
-          <input type="checkbox" value="{{item.id}}" id="{{item.id}}" checked={{categoriaChecked(item.id)}}>
-          <label for="{{item.id}} ">{{item.nombre}}</label>
-        </div>
-
-        <div>
-          <label for="inputMDEx ">Fecha</label>
-          <input value="{{archivo?.fecha}} " type="date " id="inputMDEx " class="form-control form-control-sm ">
-        </div>
-
-        <br/>
-        <div class="input-group ">
-          <div class="input-group-prepend ">
-            <span class="input-group-text " id="inputGroupFileAddon01 ">Subir</span>
+        <br/> <br>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroupFileAddon01">Subir</span>
           </div>
-          <div class="custom-file ">
-            <input [(ngModel)]="inputArchivo " (change)="fileProgress() " type="file " class="custom-file-input " id="inputArchivo " aria-describedby="inputGroupFileAddon01 ">
-            <label class="custom-file-label " for="inputArchivo ">Seleccionar archivo</label>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile01"
+              aria-describedby="inputGroupFileAddon01">
+            <label class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
           </div>
         </div>
+        
 
       </div>
 

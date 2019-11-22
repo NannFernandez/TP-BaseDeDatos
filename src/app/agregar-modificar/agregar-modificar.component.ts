@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { extensiones } from '../services/extensiones.service';
 //import { categorias } from '../services/categorias.service';
 import { Categoria } from '../domain/categoria';
+import { Contenido } from '../domain/contenido';
+import { AbmService } from '../services/abm.service';
 
 function mostrarError(component, error) {
   console.log('error', error)
@@ -19,7 +21,7 @@ function mostrarError(component, error) {
 })
 export class AgregarModificarComponent implements OnInit {
 
-  @Input() archivo: Archivo
+  @Input() contenido: Contenido
 
   async ngOnInit() {
     try {
@@ -29,15 +31,29 @@ export class AgregarModificarComponent implements OnInit {
     }
   }
 
-  ngOnChanges() {
+  /*ngOnChanges() {
     if (this.archivo) {
       this.extensionSeleccionada = this.archivo.extension
       this.categoriasSeleccionadas = this.archivo.categoria
     }
-  }
+  }*/
+
+  get minimo(){ 
+    var hoy = new Date().toISOString().slice(0,10);
+    return hoy
+ }
+
+ get maximo(){ 
+  var hoy = new Date('2020-12-31').toISOString().slice(0,10);
+  return hoy
+}
+
 
   extensiones: any = extensiones
-  //categorias: any = categorias
+  categorias: Categoria[]=[new Categoria('201','Deportes'),new Categoria('202','Economia'),new Categoria('203','Crimen')
+  ,new Categoria('204','Politica'),new Categoria('205','Ciencia'),new Categoria('207','Filosofia')
+  ,new Categoria('208','Musica'),new Categoria('209','Entretenimiento'),new Categoria('210','Otros')]
+  
   extensionSeleccionada: number = 0
   categoriasSeleccionadas: number[] = []
   inputArchivo: any = null
@@ -48,10 +64,8 @@ export class AgregarModificarComponent implements OnInit {
   uploadedFilePath: string = null;
 
   constructor(
-    private http: HttpClient,
-    private archivosService: ArchivosService,
-    private router: Router
-  ) { }
+    private http: HttpClient, private abmService: AbmService,private router: Router)
+   { }
 
   categoriaChecked(id: number) {
     console.log(id)
@@ -78,15 +92,27 @@ export class AgregarModificarComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    const formData = new FormData();
+  async onSubmit() {
+    /*const formData = new FormData();
     formData.append('file', this.fileData);
     this.http.post('https://transfer.sh/', formData)
       .subscribe((res: any) => {
         console.log(res);
         this.uploadedFilePath = res.data.filePath;
         alert('SUCCESS !!');
-      })
+      })*/
+      var myNumeroAleatorio = Math.floor(Math.random()*500)+0
+
+     if (this.contenido.idContenido === null)   {  
+        this.contenido.idContenido = myNumeroAleatorio.toString()
+        await this.abmService.agregarArchivo(this.contenido)   
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false } 
+        else { await this.abmService.modificarArchivo(this.contenido)   
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false
+
+
+        }
+      
   }
 
 }

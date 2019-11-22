@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DatosEncuesta } from '../domain/datosEncuesta';
 import { Categoria } from '../domain/categoria';
+import { EncuestasService } from '../services/encuestas.service';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-datos-encuesta',
@@ -8,15 +11,31 @@ import { Categoria } from '../domain/categoria';
   styleUrls: ['./datos-encuesta.component.css']
 })
 export class DatosEncuestaComponent implements OnInit {
+  
   lista: DatosEncuesta[]=[new DatosEncuesta, new DatosEncuesta,new DatosEncuesta,new DatosEncuesta ]
   desde: any
   hasta: any
   tipoQuery: any
-  
+  registros: number
  
-  constructor() { }
+  constructor(private http: HttpClient, private encuestasService: EncuestasService, private router: Router) { }
+  ngOnInit() { }
+ async encuestas(){ 
+   this.router.routeReuseStrategy.shouldReuseRoute = () => false
 
- 
+  if (this.tipoQuery === 'PTJ_ASC') {
+    this.lista = await this.encuestasService.mediaPuntajeAsc(this.registros,this.desde,this.hasta)
+  }
+  if (this.tipoQuery === 'PTJ_DESC') {
+    this.lista = await this.encuestasService.mediaPuntajeDesc(this.registros,this.desde,this.hasta)
+  }
+  if (this.tipoQuery === 'ENC_DESC') {
+    this.lista = await this.encuestasService.mediaEncuestaDesc(this.registros,this.desde,this.hasta)
+  }
+  if (this.tipoQuery === 'ENC_ASC') {
+    this.lista = await this.encuestasService.mediaEncuestaAsc(this.registros,this.desde,this.hasta)
+  }
+}
 
   get minimo(){ 
     var hoy = new Date().toISOString().slice(0,10);
@@ -28,7 +47,6 @@ export class DatosEncuestaComponent implements OnInit {
   return hoy
 }
 
-  ngOnInit() {
-  }
+ 
 
 }

@@ -1,7 +1,8 @@
 <br>
 <div class="contenedor">
   <div>
-    <table mdbTable class="z-depth-1 table-bordered table">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+    <table mdbTable class="table-hover">
       <thead>
         <tr>
           <th scope="row">Título</th>
@@ -11,14 +12,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let archivo of archivos" id=archivo-{{archivo.id}}>
-          <td class="editable" (click)="seleccionarArchivo(archivo.id)" data-toggle="modal" data-target="#amModal"><i class="far fa-edit lapicito"></i> {{archivo.titulo}}</td>
-          <td>{{archivo.fecha}}</td>
-          <td>{{getExtension(archivo.extension)}}</td>
-          <td data-toggle="modal" data-target="#borrarModal"><i class="fas fa-trash-alt tachito"></i></td>
+        <tr *ngFor="let contenido of contenidos" id="contenido-{{contenido.idContenido}}">
+          <td class="editable" (click)="seleccionarArchivo(contenido)" data-toggle="modal" data-target="#amModal"><i class="far fa-edit lapicito"></i> {{contenido.titulo}}</td>
+          <td>{{contenido.fechaPublicacion}}</td>
+          <td>{{contenido.extensionArchivo}}</td>
+          <td (click)="borrar(contenido)"><i class="fas fa-trash-alt tachito"></i></td>
         </tr>
       </tbody>
     </table>
+  </div>
   </div>
 
 
@@ -30,5 +32,4 @@
 
 </div>
 
-<app-agregar-modificar [archivo]="archivoSeleccionado"></app-agregar-modificar>
-<app-modal-confirmacion></app-modal-confirmacion>
+<app-agregar-modificar [contenido]="archivoSeleccionado"></app-agregar-modificar>

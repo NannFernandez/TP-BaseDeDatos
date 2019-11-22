@@ -1,33 +1,33 @@
-
 <br>
 <div class="container">
   <div class="row">
     <div class="col-sm">
-     <LABEL>Criterio de busqueda </LABEL>
+      <LABEL>Criterio de busqueda </LABEL>
       <select class="browser-default custom-select " [(ngModel)]="tipoQuery">
-      
-        <option value="ASC" >Velocidad transf. ascendente</option>
-        <option value="DESC" >Velocidad transf. descendente</option>
+
+        <option value="ASC">Velocidad transf. ascendente</option>
+        <option value="DESC">Velocidad transf. descendente</option>
       </select>
-   
+
     </div>
-        
+
     <div class="col-sm">
-        
-        <div class="md-form">
+
+      <div class="md-form">
         <input type="number" id="numberExample" class="form-control" min="0" [(ngModel)]="registros">
         <label for="numberExample">Cantidad de registros</label>
       </div>
-   
-      </div>
-      <div class="col-sm">
+
+    </div>
+    <div class="col-sm">
       <button type="sumbit" class="btn btn-success btn-lg" (click)=descargas()>Buscar</button>
     </div>
-  </div></div>
-    
+  </div>
+</div>
 
 
-  <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
 
   <table id="tablaDescarga" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
@@ -43,7 +43,7 @@
         <td>{{item.extensionArchivo}}</td>
         <td>{{item.velocidadTransf}}</td>
       </tr>
-      </tbody>
+    </tbody>
   </table>
 
 </div>

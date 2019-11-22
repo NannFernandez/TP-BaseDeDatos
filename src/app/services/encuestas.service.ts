@@ -11,24 +11,23 @@ export class EncuestasService {
 constructor(private http: HttpClient) { }
 
 async mediaPuntajeAsc(registros: number, desde: any,hasta: any) {
-  const descargas = await this.http.get<DatosEncuesta[]>(REST_SERVER_URL + '/mediaPuntajeAsc/' + registros + '/'+ desde +'/'+ hasta).toPromise()
-
-  return descargas.map((datos) => DatosEncuesta.fromJson(datos))
+  const encuestas = await this.http.get<DatosEncuesta[]>(REST_SERVER_URL + '/mediaPuntajeAsc/' + registros + '/'+ desde +'/'+ hasta).toPromise()
+  return encuestas.map((datos) => DatosEncuesta.fromJson(datos))
 }
-async mediaPuntajeDesc(registros: number) {
-  const descargas = await this.http.get<DatosEncuesta[]>(REST_SERVER_URL + '/mediaPuntajeDesc/' + registros).toPromise()
+async mediaPuntajeDesc(registros: number, desde: any,hasta: any) {
+  const encuestas = await this.http.get<DatosEncuesta[]>(REST_SERVER_URL + '/mediaPuntajeDesc/' + registros).toPromise()
   
-  return descargas.map((datos) => DatosEncuesta.fromJson(datos))
+  return encuestas.map((datos) => DatosEncuesta.fromJson(datos))
 }
-async mediaEncuestaDesc(registros: number) {
-  const descargas = await this.http.get<DatosEncuesta[]>(REST_SERVER_URL + '/mediaEncuestaDesc/' + registros).toPromise()
+async mediaEncuestaDesc(registros: number, desde: any,hasta: any) {
+  const encuestas = await this.http.get<DatosEncuesta[]>(REST_SERVER_URL + '/mediaEncuestaDesc/' + registros).toPromise()
   
-  return descargas.map((datos) => DatosEncuesta.fromJson(datos))
+  return encuestas.map((datos) => DatosEncuesta.fromJson(datos))
 }
-async mediaEncuestaAsc(registros: number) {
-  const descargas = await this.http.get<DatosEncuesta[]>(REST_SERVER_URL + '/mediaEncuestaAsc/' + registros).toPromise()
+async mediaEncuestaAsc(registros: number, desde: any,hasta: any) {
+  const encuestas = await this.http.get<DatosEncuesta[]>(REST_SERVER_URL + '/mediaEncuestaAsc/' + registros).toPromise()
  
-  return descargas.map((datos) => DatosEncuesta.fromJson(datos))
+  return encuestas.map((datos) => DatosEncuesta.fromJson(datos))
 }
 
 }
