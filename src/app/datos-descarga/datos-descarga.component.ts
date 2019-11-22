@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DatosDescarga } from '../domain/datosDescarga';
+import { HttpClient } from '@angular/common/http';
+import { DescargaServiceService } from '../services/descargaService.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-datos-descarga',
@@ -8,11 +11,21 @@ import { DatosDescarga } from '../domain/datosDescarga';
 })
 export class DatosDescargaComponent implements OnInit {
 
-  lista: DatosDescarga[]=[new DatosDescarga,new DatosDescarga,new DatosDescarga,new DatosDescarga]
+  lista: Array<DatosDescarga> = []
+  errors = []
+  registros: number 
+  tipoQuery: any
+  constructor(private http: HttpClient, private descargaService: DescargaServiceService,private router: Router) {}
 
-  constructor() { }
+  async ngOnInit() {}
+  
+  async descargas(){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false
+    if (this.tipoQuery === 'ASC'){
+    this.lista = await this.descargaService.velTransfAsc(this.registros)}
+    if (this.tipoQuery === 'DESC'){
+      this.lista = await this.descargaService.velTransfDesc(this.registros)}
+   }
 
-  ngOnInit() {
-  }
 
 }

@@ -36,4 +36,5 @@ export const routingComponents = [
   DatosCategoriaComponent,
   DatosEncuestaComponent,
   AppComponent,
+  
 ]

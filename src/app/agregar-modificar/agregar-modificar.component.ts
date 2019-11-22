@@ -4,7 +4,7 @@ import { Archivo } from '../domain/archivo';
 import { ArchivosService } from '../services/archivos.service';
 import { Router } from '@angular/router';
 import { extensiones } from '../services/extensiones.service';
-import { categorias } from '../services/categorias.service';
+//import { categorias } from '../services/categorias.service';
 import { Categoria } from '../domain/categoria';
 
 function mostrarError(component, error) {
@@ -37,7 +37,7 @@ export class AgregarModificarComponent implements OnInit {
   }
 
   extensiones: any = extensiones
-  categorias: any = categorias
+  //categorias: any = categorias
   extensionSeleccionada: number = 0
   categoriasSeleccionadas: number[] = []
   inputArchivo: any = null

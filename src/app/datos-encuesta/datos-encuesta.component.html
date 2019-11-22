@@ -1,59 +1,42 @@
-<!-- Falta ordenar bien -->
 <br>
-<div class="container">
-    <div class="row">
-       
-        <div class="col-sm">
-            <label for="example-date-input" class="">Fecha Desde</label>
-                            <div class="form-group">
-                              <input class="form-control" type="date" value="2011-08-19" id="example-date-input"
-                              [(ngModel)]="desde" max="{{minimo}}">
-                            </div>
-                            <label for="example-date-input" class="">Fecha Hasta</label>
-                          <input class="form-control" type="date" value="2011-08-19" id="example-date-input"
-                          [(ngModel)]="hasta" min="{{desde}}" max="{{minimo}}">
-                          </div>
-      
-      
-      <div class="col-sm">
- <h4><label><b>Criterio de busqueda</b></label></h4> 
-  <select class="browser-default  mdb-select md-form colorful-select dropdown-primar">
-    <option selected> </option>
-    <option value="1">Media puntaje ascendente</option>
-    <option value="2">Media puntaje descendente</option>
-    <option value="3">Cantidad Encuestas ascendente</option>
-    <option value="4">Cantidad Encuestas descendente</option>
-   
-</select>
-</div>
-<br>
-<div class="col-sm">
-<h4><label><b>Categoria</b></label></h4> 
-  <select class="browser-default  mdb-select md-form colorful-select dropdown-primar" >
-    
-    <option value="index" *ngFor="let item of categorias;let indice=index">{{item.nombre}}</option>
-    
-   
-</select></div>
+<div class="margen">
+  <div class="row">
 
-<div class="col-sm">
-    <label>Cantidad de registros</label>
-      <div class="def-number-input number-input safari_only">
-      <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-      <input class="quantity" min="0" name="quantity" value="1" type="number">
-      <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button></div>
-   
-      <button type="button" class="btn btn-success">Buscar</button>
+    <div class="col-sm">
+      <label for="example-date-input" class="">Fecha Desde</label>
+      <div class="form-group">
+        <input class="form-control" type="date" value="2011-08-19" id="example-date-input" [(ngModel)]="desde"
+          max="{{minimo}}">
+      </div>
+      <label for="example-date-input" class="">Fecha Hasta</label>
+      <input class="form-control" type="date" value="2011-08-19" id="example-date-input" [(ngModel)]="hasta"
+        min="{{desde}}" max="{{minimo}}">
+    </div>
+
+
+    <div class="col-sm">
+      <LABEL>Criterio de busqueda </LABEL>
+     <select class="browser-default custom-select " [(ngModel)]="tipoQuery">
+         
+          <option value="EDAD_ASC">Media puntaje ascendente</option>
+          <option value="EDAD_DESC">Media puntaje descendente</option>
+          <option value="TRANSF_ASC">Cantidad Encuestas ascendente</option>
+          <option value="TRANSF_DESC">Cantidad Encuestas descendente</option>
+        </select>
+        <br>
+        <div class="md-form">
+           <input type="number" id="numberExample" class="form-control" min="0" [(ngModel)]="registros">
+           <label for="numberExample">Cantidad de registros</label>
+         </div>
+
+         
+    </div>
+    <div class="col-sm"><br><br><br><button type="sumbit" class="btn btn-success btn-lg" (click)=categorias()>Buscar</button></div>
   </div>
-    
 
 </div>
-<div class="col-sm">
-
-</div>
- 
-<div class="table table-striped table-sm">
-  <br>
+  
+    <br>
     <table class="table table-bordered table-striped mb-0">
       <thead>
         <tr>
@@ -62,25 +45,25 @@
           <th scope="col">Categoria</th>
           <th scope="col">Media puntaje</th>
           <th scope="col">Cantidad de encuestas</th>
-          
+
         </tr>
       </thead>
       <tbody>
-       
-            <tr *ngFor="let item of lista;let indice=index">
-                <th>{{item.titulo}}</th>
-                <th>{{item.fecha}}</th>
-                <td>{{item.categoria}}</td>
-                <td>{{item.categoria}}</td>
-                <td>{{item.cantEncuestas}}</td>
-              </tr>
-          
-       
-        
-        
-        
-        
+
+        <tr *ngFor="let item of lista;let indice=index">
+          <th>{{item.titulo}}</th>
+          <th>{{item.fecha}}</th>
+          <td>{{item.categoria}}</td>
+          <td>{{item.categoria}}</td>
+          <td>{{item.cantEncuestas}}</td>
+        </tr>
+
+
+
+
+
+
       </tbody>
     </table>
+
   
-  </div>

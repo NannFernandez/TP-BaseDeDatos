@@ -1,60 +1,58 @@
+<br>
 
-   <br>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm">
-          <label><h4><b>Criterio de busqueda</b></h4></label> 
-          <select class="browser-default  mdb-select md-form colorful-select ">
-            <option selected> </option>
-            <option value="1">Edad media ascendente</option>
-            <option value="2">Edad media descendente</option>
-            <option value="3">Transf. media ascendente</option>
-    <option value="4">Transf. media descendente</option>
-          </select>
-        </div>
-    
-        <div class="col-sm">
-          
-    
-          <label style="margin:5px;"><h4><b>Cantidad de registros</b></h4></label>
-          <div class="def-number-input number-input safari_only">
-            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-            <input class="quantity" min="0" name="quantity" value="1" type="number">
-            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button></div>
-          
-          </div>
-          <div class="col-sm">
-          <button type="button" class="btn btn-success btn-lg">Buscar</button>
-        </div>
-      </div></div>
-    
-
-  
-  
-  <div class="table-wrapper-scroll-y my-custom-scrollbar">
-  
-    <table class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Categoria</th>
-          <th scope="col">Edad media</th>
-          <th scope="col">Transf. media</th>
-          <th scope="col">Porcentaje x categoria</th>
-          
-        </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let item of lista;let indice=index">
-              <th>{{item.categoria}}</th>
-              <td>{{item.edadMedia}}</td>
-              <td>{{item.transfMedia}}</td>
-              <td>{{item.porcentajeCat}}</td>
-            </tr>
-      
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <LABEL>Criterio de busqueda </LABEL>
+      <select class="browser-default custom-select " [(ngModel)]="tipoQuery">
        
-        
-        
-      </tbody>
-    </table>
-  
+        <option value="EDAD_ASC">Edad media ascendente</option>
+        <option value="EDAD_DESC">Edad media descendente</option>
+        <option value="TRANSF_ASC">Transf. media ascendente</option>
+        <option value="TRANSF_DESC">Transf. media descendente</option>
+      </select>
+
+    </div>
+
+    <div class="col-sm">
+
+      <div class="md-form">
+        <input type="number" id="numberExample" class="form-control" min="0" [(ngModel)]="registros">
+        <label for="numberExample">Cantidad de registros</label>
+      </div>
+
+    </div>
+    <div class="col-sm">
+      <button type="sumbit" class="btn btn-success btn-lg" (click)=categorias()>Buscar</button>
+    </div>
   </div>
+</div>
+
+
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Categoria</th>
+        <th scope="col">Edad media</th>
+        <th scope="col">Transf. media</th>
+        
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of lista;let indice=index">
+        <th>{{item.titulo}}</th>
+        <td>{{item.edadMedia}}</td>
+        <td>{{item.trasnfMedia}}</td>
+       
+      </tr>
+
+
+
+
+    </tbody>
+  </table>
+
+</div>

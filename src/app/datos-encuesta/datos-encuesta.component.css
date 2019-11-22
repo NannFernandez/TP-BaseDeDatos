@@ -1,6 +1,10 @@
+.margen{
+
+  margin-left: 100px
+}
 .my-custom-scrollbar {
     position: relative;
-    height: 200px;
+    height: 480px;
     overflow: auto;
     }
     .table-wrapper-scroll-y {
@@ -79,7 +83,9 @@
         font-size: 1rem;
         height: 2rem;
         color: #495057;
-      }
+      } 
+      
+     
       
       @media not all and (min-resolution:.001dpcm) {
         @supports (-webkit-appearance: none) and (stroke-color:transparent) {
@@ -90,3 +96,5 @@
           }
         }
       }
+
+     
