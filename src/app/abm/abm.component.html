@@ -7,28 +7,28 @@
           <th scope="row">Título</th>
           <th scope="row">Fecha</th>
           <th scope="row">Extensión</th>
-        <th scope="row">Eliminar</th>
+          <th scope="row"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let archivo of archivos" id=archivo-{{archivo.id}} >
+        <tr *ngFor="let archivo of archivos" id=archivo-{{archivo.id}}>
           <td class="editable" (click)="seleccionarArchivo(archivo.id)" data-toggle="modal" data-target="#amModal"><i class="far fa-edit lapicito"></i> {{archivo.titulo}}</td>
           <td>{{archivo.fecha}}</td>
           <td>{{getExtension(archivo.extension)}}</td>
-          <td data-toggle="modal" data-target="#borrarModal"><i class="fas fa-trash-alt"></i></td>
+          <td data-toggle="modal" data-target="#borrarModal"><i class="fas fa-trash-alt tachito"></i></td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  
-    <div>
-      <button type="button" class="btn btn-success" (click)="seleccionarArchivo(null)" data-toggle="modal" data-target="#amModal">
-        Agregar
-      </button>
-    </div>
-    
- 
+
+  <div>
+    <button type="button" class="btn btn-success masBoton" (click)="seleccionarArchivo(null)" data-toggle="modal" data-target="#amModal">
+        +
+    </button>
+  </div>
+
+
 </div>
 
 <app-agregar-modificar [archivo]="archivoSeleccionado"></app-agregar-modificar>

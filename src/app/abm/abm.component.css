@@ -1,11 +1,13 @@
 .contenedor {
+  align-items: flex-start;
+  align-content: flex-start;
   display: flex;
-  align-items: center;
+  /* flex-wrap: wrap; */
   justify-content: center;
 }
 
-.btn {
-  width: 200px;
+th {
+  text-align: center;
 }
 
 .lapicito {
@@ -18,4 +20,8 @@ td.editable:hover .lapicito {
 
 .editable:hover {
   cursor: pointer;
+}
+
+.masBoton {
+  font-size: 2em;
 }
