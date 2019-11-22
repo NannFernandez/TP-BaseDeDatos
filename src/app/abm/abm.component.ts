@@ -43,7 +43,9 @@ export class AbmComponent implements OnInit {
       if (contenido === null) {
       this.archivoSeleccionado = new Contenido
     } else {
-      this.archivoSeleccionado = contenido
+      var copy = Object.assign(contenido);
+      this.archivoSeleccionado = copy
+
     }
   }
 

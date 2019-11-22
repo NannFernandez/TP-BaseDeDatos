@@ -16,7 +16,7 @@
 
         <div>
           <label for="materialFormNameModalEx1">Título</label>
-          <input [(ngModel)]="contenido.titulo" type="text" id="materialFormNameModalEx1" class="form-control form-control-sm">
+          <input [(ngModel)]="contenido.titulo" maxlength="20" type="text" id="materialFormNameModalEx1" class="form-control form-control-sm">
         </div>
        <br>
         <label for="materialFormNameModalEx1">Extensión</label>
@@ -37,7 +37,7 @@
         <div> <br>
           <label for="example-date-input" class="">Fecha Publicación</label>
       <input class="form-control" type="date" value="contenido.fechaPublicacion" id="example-date-input" [(ngModel)]="contenido.fechaPublicacion"
-        min="{{desde}}" max="{{minimo}}">
+        min="{{desde}}" max="{{minimo}}" maxlength="10">
         </div>
 
         <br/> <br>
