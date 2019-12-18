@@ -1,7 +1,7 @@
 export class Contenido {
     idContenido: String
     titulo: String
-    fechaPublicacion: String
+    fechaPublicacion: String = '2019-12-18'
     extensionArchivo: String 
     categorias 
 

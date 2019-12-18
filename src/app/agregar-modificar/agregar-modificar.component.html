@@ -23,7 +23,7 @@
        
            <select [(ngModel)]="contenido.extensionArchivo" class="browser-default custom-select">
               <option selected>{{contenido.extensionArchivo}}</option>
-              <option *ngFor="let item of extensiones" [ngValue]="item.id">{{item.extension}}</option>
+              <option *ngFor="let item of extensiones" [ngValue]="item.extension">{{item.extension}}</option>
             </select>
             <br><br>
        <div class="margenIzq">
@@ -36,7 +36,7 @@
 
         <div> <br>
           <label for="example-date-input" class="">Fecha Publicación</label>
-      <input class="form-control" type="date" value="contenido.fechaPublicacion" id="example-date-input" [(ngModel)]="contenido.fechaPublicacion"
+      <input class="form-control" readonly="readonly" type="date" value="contenido.fechaPublicacion" id="example-date-input" [(ngModel)]="contenido.fechaPublicacion"
         min="{{desde}}" max="{{minimo}}" maxlength="10">
         </div>
 
@@ -56,8 +56,8 @@
       </div>
 
       <div class="modal-footer ">
-        <button class="btn btn-primary " (click)="onSubmit() ">Guardar</button>
-        <button class="btn btn-danger " data-dismiss="modal ">Cancelar</button>
+        <button class="btn btn-primary " (click)="onSubmit()">Guardar</button>
+        <button class="btn btn-danger " data-dismiss="modal">Cancelar</button>
       </div>
 
     </div>

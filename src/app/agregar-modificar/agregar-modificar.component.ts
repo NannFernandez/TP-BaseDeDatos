@@ -24,8 +24,18 @@ export class AgregarModificarComponent implements OnInit {
   @Input() contenido: Contenido
 
   async ngOnInit() {
+
+    
     try {
+      if (this.contenido===null){
+        this.contenido = new Contenido
+        
+        
+      }
       this.router.routeReuseStrategy.shouldReuseRoute = () => false
+      if (this.contenido.idContenido === null){
+        this.contenido.fechaPublicacion = '2'
+      }
     } catch (error) {
       mostrarError(this, error)
     }
@@ -101,18 +111,23 @@ export class AgregarModificarComponent implements OnInit {
         this.uploadedFilePath = res.data.filePath;
         alert('SUCCESS !!');
       })*/
-      var myNumeroAleatorio = Math.floor(Math.random()*500)+0
 
-     if (this.contenido.idContenido === null)   {  
-        this.contenido.idContenido = myNumeroAleatorio.toString()
+      if (this.contenido.idContenido != null){
+        await this.abmService.modificarArchivo(this.contenido)   
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false 
+
+      }else{
+    
+        
         await this.abmService.agregarArchivo(this.contenido)   
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false } 
-        else { await this.abmService.modificarArchivo(this.contenido)   
-          this.router.routeReuseStrategy.shouldReuseRoute = () => false
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false }
+       
 
-
-        }
+  
       
   }
+  
+ 
+
 
 }
