@@ -26,13 +26,7 @@
               <option *ngFor="let item of extensiones" [ngValue]="item.extension">{{item.extension}}</option>
             </select>
             <br><br>
-       <div class="margenIzq">
-           <tr *ngFor="let categoria of categorias ; let i = index">
-            
-                <input type="checkbox" class="form-check-input" id="defaultUnchecked" name="cats" id="i">
-                <label class="form-check-label" for="defaultUnchecked">{{categoria.descCategoria}}</label>
-            
-        </tr>  </div>
+     
 
         <div> <br>
           <label for="example-date-input" class="">Fecha Publicación</label>
@@ -56,7 +50,7 @@
       </div>
 
       <div class="modal-footer ">
-        <button class="btn btn-primary " (click)="onSubmit()">Guardar</button>
+        <button class="btn btn-primary " (click)="onSubmit()" data-dismiss="modal">Guardar</button>
         <button class="btn btn-danger " data-dismiss="modal">Cancelar</button>
       </div>
 

@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class DatosEncuestaComponent implements OnInit {
   
-  lista: DatosEncuesta[]=[new DatosEncuesta, new DatosEncuesta,new DatosEncuesta,new DatosEncuesta ]
+  lista: DatosEncuesta[]
   desde: any
   hasta: any
   tipoQuery: any
@@ -24,16 +24,16 @@ export class DatosEncuestaComponent implements OnInit {
    this.router.routeReuseStrategy.shouldReuseRoute = () => false
 
   if (this.tipoQuery === 'PTJ_ASC') {
-    this.lista = await this.encuestasService.mediaPuntajeAsc(this.registros,this.desde,this.hasta)
+    this.lista = await this.encuestasService.mediaPuntajeAsc(this.registros,this.parsear(this.desde),this.parsear(this.hasta))
   }
   if (this.tipoQuery === 'PTJ_DESC') {
-    this.lista = await this.encuestasService.mediaPuntajeDesc(this.registros,this.desde,this.hasta)
+    this.lista = await this.encuestasService.mediaPuntajeDesc(this.registros,this.parsear(this.desde),this.parsear(this.hasta))
   }
   if (this.tipoQuery === 'ENC_DESC') {
-    this.lista = await this.encuestasService.mediaEncuestaDesc(this.registros,this.desde,this.hasta)
+    this.lista = await this.encuestasService.mediaEncuestaDesc(this.registros,this.parsear(this.desde),this.parsear(this.hasta))
   }
   if (this.tipoQuery === 'ENC_ASC') {
-    this.lista = await this.encuestasService.mediaEncuestaAsc(this.registros,this.desde,this.hasta)
+    this.lista = await this.encuestasService.mediaEncuestaAsc(this.registros,this.parsear(this.desde),this.parsear(this.hasta))
   }
 }
 
@@ -46,6 +46,13 @@ export class DatosEncuestaComponent implements OnInit {
   var hoy = new Date('2020-12-31').toISOString().slice(0,10);
   return hoy
 }
+
+ parsear (fecha){
+   console.log(fecha.substring(0,4) + fecha.substring(5,7) + fecha.substring(8,10))
+   
+  
+  return fecha.substring(0,4) + fecha.substring(5,7) + fecha.substring(8,10)
+ }
 
  
 

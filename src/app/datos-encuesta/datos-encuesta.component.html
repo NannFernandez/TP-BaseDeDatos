@@ -6,11 +6,11 @@
       <label for="example-date-input" class="">Fecha Desde</label>
       <div class="form-group">
         <input class="form-control" type="date" value="2011-08-19" id="example-date-input" [(ngModel)]="desde"
-          max="{{minimo}}">
+          max="{{minimo}}" maxlength="10">
       </div>
       <label for="example-date-input" class="">Fecha Hasta</label>
       <input class="form-control" type="date" value="2011-08-19" id="example-date-input" [(ngModel)]="hasta"
-        min="{{desde}}" max="{{minimo}}">
+        min="{{desde}}" max="{{minimo}}" maxlength="10">
     </div>
 
 

@@ -25,28 +25,16 @@ export class AgregarModificarComponent implements OnInit {
 
   async ngOnInit() {
 
-    
-    try {
+  try {
       if (this.contenido===null){
         this.contenido = new Contenido
-        
-        
-      }
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false
-      if (this.contenido.idContenido === null){
-        this.contenido.fechaPublicacion = '2'
-      }
-    } catch (error) {
+       }
+     } catch (error) {
       mostrarError(this, error)
     }
   }
+  
 
-  /*ngOnChanges() {
-    if (this.archivo) {
-      this.extensionSeleccionada = this.archivo.extension
-      this.categoriasSeleccionadas = this.archivo.categoria
-    }
-  }*/
 
   get minimo(){ 
     var hoy = new Date().toISOString().slice(0,10);
@@ -123,11 +111,16 @@ export class AgregarModificarComponent implements OnInit {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false }
        
 
-  
+   this.refrescar()
       
   }
   
- 
+ refrescar(){
+   this.router.navigateByUrl("/botonera",
+   {skipLocationChange: true})
+   .then(()=>this.router.navigate(["/abm"]))
+  
+ }
 
 
 }

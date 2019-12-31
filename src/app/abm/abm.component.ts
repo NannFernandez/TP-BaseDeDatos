@@ -56,8 +56,8 @@ export class AbmComponent implements OnInit {
  async borrar (contenido: Contenido){
   
     await this.abmService.borrarArchivo(contenido)   
-    this.router.navigate(['abm'])
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false
+    this.contenidos = await 
+    this.abmService.contenidos()
     // no actualiza la vista
    }
 
