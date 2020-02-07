@@ -8,6 +8,14 @@ import { extensiones } from '../services/extensiones.service';
 import { Categoria } from '../domain/categoria';
 import { Contenido } from '../domain/contenido';
 import { AbmService } from '../services/abm.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/storage';
+import {finalize} from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable';
+import { pipe } from 'rxjs';
+import { isNumber } from 'util';
+
+
 
 function mostrarError(component, error) {
   console.log('error', error)
@@ -21,9 +29,20 @@ function mostrarError(component, error) {
 })
 export class AgregarModificarComponent implements OnInit {
 
+  public archivoForm = new FormGroup({
+    archivo: new FormControl(null, Validators.required),
+  });
+  
+  porcentaje: Observable<number>
+  url: Observable<String>
   @Input() contenido: Contenido
+  dir: String = ''
+  x: number;
+  habilitacion: boolean = true
 
   async ngOnInit() {
+
+    
 
   try {
       if (this.contenido===null){
@@ -33,7 +52,40 @@ export class AgregarModificarComponent implements OnInit {
       mostrarError(this, error)
     }
   }
+
+  file: File
+
+ 
+
+  urlPath: String
   
+  async onUpload(e) {
+    console.log('subir',e)
+    this.habilitacion = false
+    const id= Math.random().toString(36).substring(2)
+    const file= e.target.files[0]
+    const filePath = `uploads/${id}`
+    //this.contenido.extensionArchivo =file.target.value.substring(file.target.value.length-2,file.target.value.length -1,file.target.value.length)
+    this.dir= id
+    const ref = this.storage.ref(filePath)
+    const task= this.storage.upload(filePath,file)
+    this.porcentaje= task.percentageChanges()
+    task.snapshotChanges().pipe(finalize(
+      function () {
+        this.url = ref.getDownloadURL()
+      }
+    )).subscribe()
+
+    console.log(this.url.subscribe())
+    
+
+  }
+
+
+  delete(downloadUrl) {
+    return this.storage.storage.refFromURL(downloadUrl).delete();
+  }
+
 
 
   get minimo(){ 
@@ -61,9 +113,10 @@ export class AgregarModificarComponent implements OnInit {
   fileUploadProgress: string = null;
   uploadedFilePath: string = null;
 
-  constructor(
-    private http: HttpClient, private abmService: AbmService,private router: Router)
-   { }
+  constructor(private http: HttpClient, private abmService: AbmService,private router: Router,private storage: AngularFireStorage)
+   {
+  
+    }
 
   categoriaChecked(id: number) {
     console.log(id)
@@ -99,14 +152,15 @@ export class AgregarModificarComponent implements OnInit {
         this.uploadedFilePath = res.data.filePath;
         alert('SUCCESS !!');
       })*/
-
+      this.habilitacion=true
       if (this.contenido.idContenido != null){
+        this.contenido.url=this.dir
         await this.abmService.modificarArchivo(this.contenido)   
         this.router.routeReuseStrategy.shouldReuseRoute = () => false 
 
       }else{
     
-        
+        this.contenido.url=this.dir
         await this.abmService.agregarArchivo(this.contenido)   
         this.router.routeReuseStrategy.shouldReuseRoute = () => false }
        
@@ -119,8 +173,22 @@ export class AgregarModificarComponent implements OnInit {
    this.router.navigateByUrl("/botonera",
    {skipLocationChange: true})
    .then(()=>this.router.navigate(["/abm"]))
-  
+   
  }
+
+  habilitarSubir(){
+  
+   if (this.dir == '' ){ return false}
+   else {return  this.habilitacion}
+
+}
+
+onCancel() {
+
+  this.habilitacion=true
+  this.refrescar()
+}
+
 
 
 }

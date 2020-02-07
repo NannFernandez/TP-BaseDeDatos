@@ -8,6 +8,7 @@
           <th scope="row">Título</th>
           <th scope="row">Fecha</th>
           <th scope="row">Extensión</th>
+          <th scope="row">Url</th>
           <th scope="row"></th>
         </tr>
       </thead>
@@ -16,6 +17,7 @@
           <td class="editable" (click)="seleccionarArchivo(contenido)" data-toggle="modal" data-target="#amModal"><i class="far fa-edit lapicito"></i> {{contenido.titulo}}</td>
           <td>{{contenido.fechaPublicacion}}</td>
           <td>{{contenido.extensionArchivo}}</td>
+          <td>gs://fir-base-datos-unsam.appspot.com/uploads/{{contenido.url}}</td>
           <td (click)="borrar(contenido)"><i class="fas fa-trash-alt tachito"></i></td>
         </tr>
       </tbody>

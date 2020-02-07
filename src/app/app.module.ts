@@ -12,6 +12,12 @@ import { ModalConfirmacionComponent } from './modal-confirmacion/modal-confirmac
 import { DescargaServiceService } from './services/descargaService.service';
 
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { environment } from '../environments/environment';
+
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -29,7 +35,10 @@ import { DescargaServiceService } from './services/descargaService.service';
       ModalModule,
       AppRoutingModule,
       HttpClientModule,
-      MDBBootstrapModule.forRoot()
+      MDBBootstrapModule.forRoot(),
+      AngularFireModule.initializeApp(environment.firebase),
+      AngularFireStorageModule,
+      ReactiveFormsModule
    ],
    schemas:[NO_ERRORS_SCHEMA],
    providers: [DescargaServiceService],

@@ -30,11 +30,11 @@ async categorias() {
 
   async modificarArchivo(contenido: Contenido) {
     console.log(contenido)
-     return this.http.put(REST_SERVER_URL + '/contenidos' +'/modificar/'+ contenido.titulo + '/' + contenido.extensionArchivo +'/' + contenido.idContenido, contenido.toJSON()).toPromise()
+     return this.http.put(REST_SERVER_URL + '/contenidos' +'/modificar/'+ contenido.titulo + '/' + contenido.extensionArchivo +'/' + contenido.idContenido + '/' + contenido.url, contenido.toJSON()).toPromise()
     }
 
     async agregarArchivo(contenido: Contenido) {
-       return this.http.post(REST_SERVER_URL + '/contenidos' + '/agregar/' + contenido.titulo + '/' + contenido.extensionArchivo, contenido.toJSON()).toPromise()
+       return this.http.post(REST_SERVER_URL + '/contenidos' + '/agregar/' + contenido.titulo + '/' + contenido.extensionArchivo + '/' + contenido.url, contenido.toJSON()).toPromise()
      }
 
   async borrarArchivo(contenido: Contenido) {
