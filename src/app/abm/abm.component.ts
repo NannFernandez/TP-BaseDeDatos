@@ -26,6 +26,7 @@ export class AbmComponent implements OnInit {
   contenidos: Contenido[]=[]
   categorias: Categoria[]=[]
   idBorrar: Contenido;
+  hoy: Date= new Date
 
   constructor(private http: HttpClient, private abmService: AbmService,private router: Router) { }
 
@@ -41,7 +42,7 @@ export class AbmComponent implements OnInit {
   async seleccionarArchivo(contenido: Contenido) {
       if (contenido === null) {
       this.archivoSeleccionado = new Contenido
-      this.archivoSeleccionado.fechaPublicacion = '2020-02-07'
+     
     } else {
       var copy = Object.assign(new Contenido,contenido);
       this.archivoSeleccionado = copy

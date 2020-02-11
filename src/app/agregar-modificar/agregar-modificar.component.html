@@ -34,27 +34,23 @@
         </div>
         <br>
         <label for="materialFormNameModalEx1">Extensión</label>
-
-        <select [(ngModel)]="contenido.extensionArchivo" class="browser-default custom-select">
-          <option selected>{{contenido.extensionArchivo}}</option>
-          <option *ngFor="let item of extensiones" [ngValue]="item.extension">{{item.extension}}</option>
-        </select>
-        <br><br>
+        <input [(ngModel)]="contenido.extensionArchivo" maxlength="3" type="text" id="materialFormNameModalEx1"
+        class="form-control form-control-sm" readonly>
+        
 
 
         <div> <br>
           <label for="example-date-input" class="">Fecha Publicación</label>
-          <input class="form-control" readonly="readonly" type="date" value="contenido.fechaPublicacion"
+          <input class="form-control" readonly="readonly" type="text" value="contenido.fechaPublicacion"
             id="example-date-input" [(ngModel)]="contenido.fechaPublicacion" min="{{desde}}" max="{{minimo}}"
             maxlength="10">
         </div>
 
-        <br /> <br>
+        <br /> 
 
         <div class="from-group">
-
-          <h3>Seleccionar Archivo: </h3>
-          <input type="file" (change)=prepareUpload($event)>
+        
+          <input type="file" (change)=prepareUpload($event) accept=".doc, .pdf, .wav, .mpr3, .txt" *ngIf="habilitadoSubir">
           <br>
 
           <progress *ngIf="porcentaje > 0 && porcentaje < 100" class="progress is-large is-success"
@@ -62,9 +58,9 @@
           <br>
           <button (click)=uploadFile($event) class="btn btn-sm btn-secondary"
             [ngClass]="{'button': true, 'is-success': true, 'is-large': true, 'is-loading': porcentaje > 0 && porcentaje < 100}"
-            [disabled]="!archivoForm.valid && (porcentaje > 0 && porcentaje < 100)">Subir archivo</button>
-          <button (click)=deleteFile() class="btn btn-sm btn-secondary">Eliminar</button>
-          <button (click)=getFileUrl() class="btn btn-sm btn-secondary">URL</button>
+            [disabled]="!archivoForm.valid && (porcentaje > 0 && porcentaje < 100)" *ngIf="habilitado()">Subir
+            archivo</button>
+
           <!-- <span>{{url | async}}</span> -->
           <div class="progress">
             <div [style.visibility]="(porcentaje == 0) ? 'hidden' : 'visible'"
@@ -80,7 +76,13 @@
 
 
       <div class="modal-footer ">
-        <button class="btn btn-primary " (click)="onSubmit()" data-dismiss="modal">Guardar</button>
+        <button class="btn btn-primary " (click)="onSubmit()" data-dismiss="modal" *ngIf="poderGuardar() && downloadUrl | async ; else btnDisabled">Guardar</button>
+       
+        <ng-template #btnDisabled>
+
+          <button class="btn btn-primary " (click)="onSubmit()" data-dismiss="modal" disabled="true">Guardar</button>
+
+        </ng-template>
         <button class="btn btn-danger " (click)="onCancel()" data-dismiss="modal">Cancelar</button>
       </div>
 

@@ -42,6 +42,9 @@ export class AgregarModificarComponent implements OnInit {
   downloadUrl: Observable<String>
   urlPath: string
   urlReal: String
+  habilitadoSubir: boolean = true;
+  habilitadoExaminar: boolean = false;
+  hoy: Date = new Date
 
   async ngOnInit() {
     try {
@@ -59,6 +62,7 @@ export class AgregarModificarComponent implements OnInit {
   }
 
   uploadFile() {
+    this.habilitadoSubir = false
     const id = Math.random().toString(36).substring(2)
     this.urlPath = `uploads/${id}`
     this.dir = id
@@ -75,6 +79,8 @@ export class AgregarModificarComponent implements OnInit {
       })
     ).subscribe()
 
+
+    this.contenido.extensionArchivo = this.file.name.substring(this.file.name.length - 3, this.file.name.length)
   }
 
   getFileUrl() {
@@ -162,7 +168,8 @@ export class AgregarModificarComponent implements OnInit {
       this.router.routeReuseStrategy.shouldReuseRoute = () => false
     }
 
-
+    this.habilitadoSubir = true
+    this.habilitadoExaminar = false
     this.refrescar()
 
   }
@@ -174,19 +181,30 @@ export class AgregarModificarComponent implements OnInit {
 
   }
 
-  habilitarSubir() {
 
-    if (this.dir == '') { return false }
-    else { return this.habilitacion }
+  habilitado() {
+    if (this.file !== undefined) {
+      this.habilitadoExaminar = true
+    }
 
+    console.log(this.habilitadoSubir, this.habilitadoExaminar, this.dir, 
+      this.contenido.fechaPublicacion,this.hoy.getDate().toString() + (this.hoy.getMonth() + 1).toString(), this.hoy.getFullYear().toString()+'-'+(this.hoy.getMonth() + 1).toString() +'-'+this.hoy.getDate().toString())
+    return this.habilitadoSubir && this.habilitadoExaminar
   }
+
+
 
   onCancel() {
 
-    this.habilitacion = true
+    this.habilitadoSubir = true
+    this.habilitadoExaminar = false
     this.refrescar()
   }
 
-
-
+  poderGuardar() {
+  if  (this.contenido.titulo !== undefined  && this.contenido.extensionArchivo !== undefined
+    && this.contenido.titulo!=='' && this.contenido.extensionArchivo !=='')
+    return true
+    else return false
+  }
 }
