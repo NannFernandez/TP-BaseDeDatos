@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
- 
+
   firebase: {
     apiKey: "AIzaSyAGzReQ_HiEAAhNs4opl7oYLRacU0CAyPE",
     authDomain: "fir-base-datos-unsam.firebaseapp.com",
@@ -15,7 +15,7 @@ export const environment = {
     appId: "1:514372234553:web:8c6924ff39946cf52e0ce8",
     measurementId: "G-NZ9W6VHXNM"
   }
-  
+
 };
 
 

@@ -10,7 +10,7 @@ import { Contenido } from '../domain/contenido';
 import { AbmService } from '../services/abm.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/storage';
-import {finalize} from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 import { pipe } from 'rxjs';
 import { isNumber } from 'util';
@@ -32,78 +32,76 @@ export class AgregarModificarComponent implements OnInit {
   public archivoForm = new FormGroup({
     archivo: new FormControl(null, Validators.required),
   });
-  
-  porcentaje: Observable<number>
-  url: Observable<String>
+
   @Input() contenido: Contenido
   dir: String = ''
   x: number;
   habilitacion: boolean = true
+  porcentaje: Observable<number>
+  file: File
+  downloadUrl: Observable<String>
+  urlPath: string
+  urlReal: String
 
   async ngOnInit() {
-
-    
-
-  try {
-      if (this.contenido===null){
+    try {
+      if (this.contenido === null) {
         this.contenido = new Contenido
-       }
-     } catch (error) {
+      }
+    } catch (error) {
       mostrarError(this, error)
     }
   }
 
-  file: File
-
- 
-
-  urlPath: String
-  
-  async onUpload(e) {
-    console.log('subir',e)
+  prepareUpload(e) {
     this.habilitacion = false
-    const id= Math.random().toString(36).substring(2)
-    const file= e.target.files[0]
-    const filePath = `uploads/${id}`
-    //this.contenido.extensionArchivo =file.target.value.substring(file.target.value.length-2,file.target.value.length -1,file.target.value.length)
-    this.dir= id
-    const ref = this.storage.ref(filePath)
-    const task= this.storage.upload(filePath,file)
-    this.porcentaje= task.percentageChanges()
+    this.file = e.target.files[0]
+  }
+
+  uploadFile() {
+    const id = Math.random().toString(36).substring(2)
+    this.urlPath = `uploads/${id}`
+    this.dir = id
+    const ref = this.storage.ref(this.urlPath)
+
+    console.log(`URL del archivo: ${this.urlPath}`)
+
+    const task = this.storage.upload(this.urlPath, this.file)
+    this.porcentaje = task.percentageChanges()
     task.snapshotChanges().pipe(finalize(
-      function () {
-        this.url = ref.getDownloadURL()
-      }
-    )).subscribe()
-
-    console.log(this.url.subscribe())
-    
+      () => {
+        this.downloadUrl = ref.getDownloadURL()
+        this.downloadUrl.subscribe(url => (this.urlReal = url))
+      })
+    ).subscribe()
 
   }
 
-
-  delete(downloadUrl) {
-    return this.storage.storage.refFromURL(downloadUrl).delete();
+  getFileUrl() {
+    console.log(this.urlReal)
   }
 
+  deleteFile() {
+    const ref = this.storage.ref(this.urlPath)
+    ref.delete()
+  }
 
-
-  get minimo(){ 
-    var hoy = new Date().toISOString().slice(0,10);
+  get minimo() {
+    var hoy = new Date().toISOString().slice(0, 10);
     return hoy
- }
+  }
 
- get maximo(){ 
-  var hoy = new Date('2020-12-31').toISOString().slice(0,10);
-  return hoy
-}
+  get maximo() {
+    var hoy = new Date('2020-12-31').toISOString().slice(0, 10);
+    return hoy
+  }
 
 
   extensiones: any = extensiones
-  categorias: Categoria[]=[new Categoria('201','Deportes'),new Categoria('202','Economia'),new Categoria('203','Crimen')
-  ,new Categoria('204','Politica'),new Categoria('205','Ciencia'),new Categoria('207','Filosofia')
-  ,new Categoria('208','Musica'),new Categoria('209','Entretenimiento'),new Categoria('210','Otros')]
-  
+  categorias: Categoria[] = [new Categoria('201', 'Deportes'), new Categoria('202', 'Economia'), new Categoria('203', 'Crimen')
+    , new Categoria('204', 'Politica'), new Categoria('205', 'Ciencia'), new Categoria('207', 'Filosofia')
+    , new Categoria('208', 'Musica'), new Categoria('209', 'Entretenimiento'), new Categoria('210', 'Otros')]
+
   extensionSeleccionada: number = 0
   categoriasSeleccionadas: number[] = []
   inputArchivo: any = null
@@ -113,10 +111,9 @@ export class AgregarModificarComponent implements OnInit {
   fileUploadProgress: string = null;
   uploadedFilePath: string = null;
 
-  constructor(private http: HttpClient, private abmService: AbmService,private router: Router,private storage: AngularFireStorage)
-   {
-  
-    }
+  constructor(private http: HttpClient, private abmService: AbmService, private router: Router, private storage: AngularFireStorage) {
+
+  }
 
   categoriaChecked(id: number) {
     console.log(id)
@@ -152,42 +149,43 @@ export class AgregarModificarComponent implements OnInit {
         this.uploadedFilePath = res.data.filePath;
         alert('SUCCESS !!');
       })*/
-      this.habilitacion=true
-      if (this.contenido.idContenido != null){
-        this.contenido.url=this.dir
-        await this.abmService.modificarArchivo(this.contenido)   
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false 
+    this.habilitacion = true
+    if (this.contenido.idContenido != null) {
+      this.contenido.url = this.dir
+      await this.abmService.modificarArchivo(this.contenido)
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false
 
-      }else{
-    
-        this.contenido.url=this.dir
-        await this.abmService.agregarArchivo(this.contenido)   
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false }
-       
+    } else {
 
-   this.refrescar()
-      
+      this.contenido.url = this.dir
+      await this.abmService.agregarArchivo(this.contenido)
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false
+    }
+
+
+    this.refrescar()
+
   }
-  
- refrescar(){
-   this.router.navigateByUrl("/botonera",
-   {skipLocationChange: true})
-   .then(()=>this.router.navigate(["/abm"]))
-   
- }
 
-  habilitarSubir(){
-  
-   if (this.dir == '' ){ return false}
-   else {return  this.habilitacion}
+  refrescar() {
+    this.router.navigateByUrl("/botonera",
+      { skipLocationChange: true })
+      .then(() => this.router.navigate(["/abm"]))
 
-}
+  }
 
-onCancel() {
+  habilitarSubir() {
 
-  this.habilitacion=true
-  this.refrescar()
-}
+    if (this.dir == '') { return false }
+    else { return this.habilitacion }
+
+  }
+
+  onCancel() {
+
+    this.habilitacion = true
+    this.refrescar()
+  }
 
 
 

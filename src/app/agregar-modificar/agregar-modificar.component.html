@@ -1,13 +1,14 @@
 <body>
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="/__/firebase/7.8.0/firebase-app.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="/__/firebase/7.8.0/firebase-app.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
+  <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="/__/firebase/7.8.0/firebase-analytics.js"></script>
+  <script src="/__/firebase/7.8.0/firebase-analytics.js"></script>
 
-<!-- Initialize Firebase -->
-<script src="/__/firebase/init.js"></script></body>
+  <!-- Initialize Firebase -->
+  <script src="/__/firebase/init.js"></script>
+</body>
 
 
 <div class="modal fade" id="amModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -28,54 +29,62 @@
 
         <div>
           <label for="materialFormNameModalEx1">Título</label>
-          <input [(ngModel)]="contenido.titulo" maxlength="20" type="text" id="materialFormNameModalEx1" class="form-control form-control-sm">
+          <input [(ngModel)]="contenido.titulo" maxlength="20" type="text" id="materialFormNameModalEx1"
+            class="form-control form-control-sm">
         </div>
-       <br>
+        <br>
         <label for="materialFormNameModalEx1">Extensión</label>
-       
-           <select [(ngModel)]="contenido.extensionArchivo" class="browser-default custom-select">
-              <option selected>{{contenido.extensionArchivo}}</option>
-              <option *ngFor="let item of extensiones" [ngValue]="item.extension">{{item.extension}}</option>
-            </select>
-            <br><br>
-     
+
+        <select [(ngModel)]="contenido.extensionArchivo" class="browser-default custom-select">
+          <option selected>{{contenido.extensionArchivo}}</option>
+          <option *ngFor="let item of extensiones" [ngValue]="item.extension">{{item.extension}}</option>
+        </select>
+        <br><br>
+
 
         <div> <br>
           <label for="example-date-input" class="">Fecha Publicación</label>
-      <input class="form-control" readonly="readonly" type="date" value="contenido.fechaPublicacion" id="example-date-input" [(ngModel)]="contenido.fechaPublicacion"
-        min="{{desde}}" max="{{minimo}}" maxlength="10">
+          <input class="form-control" readonly="readonly" type="date" value="contenido.fechaPublicacion"
+            id="example-date-input" [(ngModel)]="contenido.fechaPublicacion" min="{{desde}}" max="{{minimo}}"
+            maxlength="10">
         </div>
 
-        <br/> <br>
+        <br /> <br>
 
-      <div class="from-group">
-        
-        <h3>Seleccionar Archivo: </h3>
-        <input type="file" (change)=onUpload($event)>
-        <br>
-        
-        <progress *ngIf="porcentaje > 0 && porcentaje < 100" class="progress is-large is-success" value="{{porcentaje}}" max="100">{{porcentaje}}%</progress>
-        <br>
-        <button [ngClass]="{'button': true, 'is-success': true, 'is-large': true, 'is-loading': porcentaje > 0 && porcentaje < 100}" [disabled]="!archivoForm.valid && (porcentaje > 0 && porcentaje < 100)">Subir archivo</button>
-        <span>{{url | async}}</span>
-        <div class="progress">
-          <div [style.visibility]="(porcentaje == 0) ? 'hidden' : 'visible'" class="progress-bar progress-bar-striped bg-success"
-            role="progressbar" [style.width]="(porcentaje | async) +'%'">
+        <div class="from-group">
+
+          <h3>Seleccionar Archivo: </h3>
+          <input type="file" (change)=prepareUpload($event)>
+          <br>
+
+          <progress *ngIf="porcentaje > 0 && porcentaje < 100" class="progress is-large is-success"
+            value="{{porcentaje}}" max="100">{{porcentaje}}%</progress>
+          <br>
+          <button (click)=uploadFile($event) class="btn btn-sm btn-secondary"
+            [ngClass]="{'button': true, 'is-success': true, 'is-large': true, 'is-loading': porcentaje > 0 && porcentaje < 100}"
+            [disabled]="!archivoForm.valid && (porcentaje > 0 && porcentaje < 100)">Subir archivo</button>
+          <button (click)=deleteFile() class="btn btn-sm btn-secondary">Eliminar</button>
+          <button (click)=getFileUrl() class="btn btn-sm btn-secondary">URL</button>
+          <!-- <span>{{url | async}}</span> -->
+          <div class="progress">
+            <div [style.visibility]="(porcentaje == 0) ? 'hidden' : 'visible'"
+              class="progress-bar progress-bar-striped bg-success" role="progressbar"
+              [style.width]="(porcentaje | async) +'%'">
+            </div>
           </div>
         </div>
+
+
+
       </div>
 
-     
-        
-</div> 
-      
 
       <div class="modal-footer ">
-        <button class="btn btn-primary " (click)="onSubmit()" data-dismiss="modal" >Guardar</button>
+        <button class="btn btn-primary " (click)="onSubmit()" data-dismiss="modal">Guardar</button>
         <button class="btn btn-danger " (click)="onCancel()" data-dismiss="modal">Cancelar</button>
       </div>
 
-    
+
+    </div>
   </div>
-</div>
 </div>
