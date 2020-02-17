@@ -36,7 +36,7 @@
         <label for="materialFormNameModalEx1">Extensión</label>
         <input [(ngModel)]="contenido.extensionArchivo" maxlength="3" type="text" id="materialFormNameModalEx1"
         class="form-control form-control-sm" readonly>
-        
+
 
 
         <div> <br>
@@ -46,10 +46,16 @@
             maxlength="10">
         </div>
 
-        <br /> 
+        <br />
+
+        <div class="form-check" *ngFor="let categ of categorias">
+          <input (click)=checkCategoria($event) type="checkbox" class="form-check-input" id="{{categ.id}}" [(ngModel)]="categ.checked">
+          <label class="form-check-label" for="cat1">{{categ.nombre}}</label>
+        </div>
+        <br>
 
         <div class="from-group">
-        
+
           <input type="file" (change)=prepareUpload($event) accept=".doc, .pdf, .wav, .mpr3, .txt" *ngIf="habilitadoSubir">
           <br>
 
@@ -60,6 +66,8 @@
             [ngClass]="{'button': true, 'is-success': true, 'is-large': true, 'is-loading': porcentaje > 0 && porcentaje < 100}"
             [disabled]="!archivoForm.valid && (porcentaje > 0 && porcentaje < 100)" *ngIf="habilitado()">Subir
             archivo</button>
+
+          <button (click)=printContenido($event) class="btn btn-sm btn-secondary">Test</button>
 
           <!-- <span>{{url | async}}</span> -->
           <div class="progress">
@@ -77,7 +85,7 @@
 
       <div class="modal-footer ">
         <button class="btn btn-primary " (click)="onSubmit()" data-dismiss="modal" *ngIf="poderGuardar() && downloadUrl | async ; else btnDisabled">Guardar</button>
-       
+
         <ng-template #btnDisabled>
 
           <button class="btn btn-primary " (click)="onSubmit()" data-dismiss="modal" disabled="true">Guardar</button>

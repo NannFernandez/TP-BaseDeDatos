@@ -83,6 +83,42 @@ export class AgregarModificarComponent implements OnInit {
     this.contenido.extensionArchivo = this.file.name.substring(this.file.name.length - 3, this.file.name.length)
   }
 
+
+  categorias: any = [
+      {"nombre": "Cat 1", "id": "cat1", "checked": false},
+      {"nombre": "Cat 2", "id": "cat2", "checked": false},
+      {"nombre": "Cat 3", "id": "cat3", "checked": true}
+    ]
+
+  categoriasSeleccionadas: String[] = []
+
+  checkCategoria(event) {
+    let catId: string = (event.target as Element).id;
+    let checked = event.target.checked
+
+    if (checked) {
+      this.agregarCategoria(catId)
+    } else {
+      this.eliminarCategoria(catId)
+    }
+
+    this.contenido.categorias = this.categoriasSeleccionadas
+  }
+
+  eliminarCategoria(cat) {
+   this.categoriasSeleccionadas.forEach( (item, index) => {
+     if(item === cat) this.categoriasSeleccionadas.splice(index,1)
+   })
+  }
+
+  agregarCategoria(cat) {
+   this.categoriasSeleccionadas.push(cat)
+  }
+
+  printContenido(event) {
+    console.log(this.contenido)
+  }
+
   getFileUrl() {
     console.log(this.urlReal)
   }
@@ -104,12 +140,11 @@ export class AgregarModificarComponent implements OnInit {
 
 
   extensiones: any = extensiones
-  categorias: Categoria[] = [new Categoria('201', 'Deportes'), new Categoria('202', 'Economia'), new Categoria('203', 'Crimen')
-    , new Categoria('204', 'Politica'), new Categoria('205', 'Ciencia'), new Categoria('207', 'Filosofia')
-    , new Categoria('208', 'Musica'), new Categoria('209', 'Entretenimiento'), new Categoria('210', 'Otros')]
+  // categorias: Categoria[] = [new Categoria('201', 'Deportes'), new Categoria('202', 'Economia'), new Categoria('203', 'Crimen')
+  //   , new Categoria('204', 'Politica'), new Categoria('205', 'Ciencia'), new Categoria('207', 'Filosofia')
+  //   , new Categoria('208', 'Musica'), new Categoria('209', 'Entretenimiento'), new Categoria('210', 'Otros')]
 
   extensionSeleccionada: number = 0
-  categoriasSeleccionadas: number[] = []
   inputArchivo: any = null
 
   fileData: File = null;
@@ -121,10 +156,10 @@ export class AgregarModificarComponent implements OnInit {
 
   }
 
-  categoriaChecked(id: number) {
-    console.log(id)
-    this.categoriasSeleccionadas.includes(id)
-  }
+  // categoriaChecked(id: number) {
+  //   console.log(id)
+  //   this.categoriasSeleccionadas.includes(id)
+  // }
 
   fileProgress() {
     console.log(this.inputArchivo)
@@ -187,7 +222,7 @@ export class AgregarModificarComponent implements OnInit {
       this.habilitadoExaminar = true
     }
 
-    console.log(this.habilitadoSubir, this.habilitadoExaminar, this.dir, 
+    console.log(this.habilitadoSubir, this.habilitadoExaminar, this.dir,
       this.contenido.fechaPublicacion,this.hoy.getDate().toString() + (this.hoy.getMonth() + 1).toString(), this.hoy.getFullYear().toString()+'-'+(this.hoy.getMonth() + 1).toString() +'-'+this.hoy.getDate().toString())
     return this.habilitadoSubir && this.habilitadoExaminar
   }

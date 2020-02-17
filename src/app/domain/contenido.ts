@@ -1,12 +1,12 @@
 export class Contenido {
-  
-    
+
+
     idContenido: String
     titulo: String= ''
-    fechaPublicacion: String 
+    fechaPublicacion: String
     extensionArchivo: String  = ''
     url: String = 'asdasdasd'
-    categorias 
+    categorias: String[] = []
     hoy: Date= new Date
 
 
