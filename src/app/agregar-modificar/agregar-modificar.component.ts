@@ -85,9 +85,16 @@ export class AgregarModificarComponent implements OnInit {
 
 
   categorias: any = [
-      {"nombre": "Cat 1", "id": "cat1", "checked": false},
-      {"nombre": "Cat 2", "id": "cat2", "checked": false},
-      {"nombre": "Cat 3", "id": "cat3", "checked": true}
+      {"nombre": "Deportes", "id": "201", "checked": false},
+      {"nombre": "Salud", "id": "202", "checked": false},
+      {"nombre": "Economia", "id": "203", "checked": false},
+      {"nombre": "Crimen", "id": "204", "checked": false},
+      {"nombre": "Politica", "id": "205", "checked": false},
+      {"nombre": "Ciencia", "id": "206", "checked": false},
+      {"nombre": "Filosofia", "id": "207", "checked": false},
+      {"nombre": "Musica", "id": "208", "checked": false},
+      {"nombre": "Entretenimientos", "id": "209", "checked": false},
+      {"nombre": "Otros", "id": "210", "checked": false}
     ]
 
   categoriasSeleccionadas: String[] = []
@@ -205,6 +212,7 @@ export class AgregarModificarComponent implements OnInit {
 
     this.habilitadoSubir = true
     this.habilitadoExaminar = false
+    this.contenido.fechaPublicacion = this.hoy.toISOString().slice(0, 10);
     this.refrescar()
 
   }
@@ -231,6 +239,7 @@ export class AgregarModificarComponent implements OnInit {
 
   onCancel() {
 
+    this.deleteFile
     this.habilitadoSubir = true
     this.habilitadoExaminar = false
     this.refrescar()
