@@ -45,11 +45,13 @@ export class AgregarModificarComponent implements OnInit {
   habilitadoSubir: boolean = true;
   habilitadoExaminar: boolean = false;
   hoy: Date = new Date
+  categorias: any = []
 
   async ngOnInit() {
     try {
       if (this.contenido === null) {
         this.contenido = new Contenido
+        this.categorias = await this.buscarCategorias()
       }
     } catch (error) {
       mostrarError(this, error)
@@ -84,18 +86,27 @@ export class AgregarModificarComponent implements OnInit {
   }
 
 
-  categorias: any = [
-      {"nombre": "Deportes", "id": "201", "checked": false},
-      {"nombre": "Salud", "id": "202", "checked": false},
-      {"nombre": "Economia", "id": "203", "checked": false},
-      {"nombre": "Crimen", "id": "204", "checked": false},
-      {"nombre": "Politica", "id": "205", "checked": false},
-      {"nombre": "Ciencia", "id": "206", "checked": false},
-      {"nombre": "Filosofia", "id": "207", "checked": false},
-      {"nombre": "Musica", "id": "208", "checked": false},
-      {"nombre": "Entretenimientos", "id": "209", "checked": false},
-      {"nombre": "Otros", "id": "210", "checked": false}
-    ]
+  // categorias: any = [
+  //     {"nombre": "Deportes", "id": "201", "checked": false},
+  //     {"nombre": "Salud", "id": "202", "checked": false},
+  //     {"nombre": "Economia", "id": "203", "checked": false},
+  //     {"nombre": "Crimen", "id": "204", "checked": false},
+  //     {"nombre": "Politica", "id": "205", "checked": false},
+  //     {"nombre": "Ciencia", "id": "206", "checked": false},
+  //     {"nombre": "Filosofia", "id": "207", "checked": false},
+  //     {"nombre": "Musica", "id": "208", "checked": false},
+  //     {"nombre": "Entretenimientos", "id": "209", "checked": false},
+  //     {"nombre": "Otros", "id": "210", "checked": false}
+  //   ]
+
+  async buscarCategorias() {
+    let categorias = await this.abmService.categorias()
+    categorias.forEach( (item, index) => {
+      item["checked"] = false
+    })
+
+    return categorias
+  }
 
   categoriasSeleccionadas: String[] = []
 

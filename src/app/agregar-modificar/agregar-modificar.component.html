@@ -49,8 +49,8 @@
         <br />
 
         <div class="form-check" *ngFor="let categ of categorias">
-          <input (click)=checkCategoria($event) type="checkbox" class="form-check-input" id="{{categ.id}}" [(ngModel)]="categ.checked">
-          <label class="form-check-label" for="cat1">{{categ.nombre}}</label>
+          <input (click)=checkCategoria($event) type="checkbox" class="form-check-input" id="{{categ.idCategoria}}" [(ngModel)]="categ.checked">
+          <label class="form-check-label" for="cat1">{{categ.descCategoria}}</label>
         </div>
         <br>
 

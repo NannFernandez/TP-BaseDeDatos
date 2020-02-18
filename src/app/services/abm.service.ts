@@ -24,7 +24,7 @@ async categorias() {
 
  async getArchivo(id: number) {
      const archivo = await this.http.get<Contenido>(REST_SERVER_URL + '/contenidos/' + id).toPromise()
-   
+
     return Contenido.fromJson(archivo)
   }
 
@@ -34,13 +34,14 @@ async categorias() {
     }
 
     async agregarArchivo(contenido: Contenido) {
+      console.log(contenido)
        return this.http.post(REST_SERVER_URL + '/contenidos' + '/agregar2', contenido.toJSON()).toPromise()
      }
 
   async borrarArchivo(contenido: Contenido) {
-    
+
     return this.http.put(REST_SERVER_URL + '/contenidos' +'/borrar/' + contenido.idContenido, contenido.toJSON()).toPromise()
-    
+
  }
 
 }
