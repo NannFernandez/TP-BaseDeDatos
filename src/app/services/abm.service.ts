@@ -22,6 +22,11 @@ async categorias() {
   return categorias.map((datos) => Contenido.fromJson(datos))
 }
 
+async categoriasContenido(id: String) {
+  const categorias = await this.http.get<Categoria[]>(REST_SERVER_URL + '/categorias/' + id).toPromise()
+  return categorias.map((datos) => Contenido.fromJson(datos))
+}
+
  async getArchivo(id: number) {
      const archivo = await this.http.get<Contenido>(REST_SERVER_URL + '/contenidos/' + id).toPromise()
 

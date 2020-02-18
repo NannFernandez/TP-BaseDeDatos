@@ -49,9 +49,17 @@ export class AgregarModificarComponent implements OnInit {
 
   async ngOnInit() {
     try {
+      this.categorias = await this.buscarCategorias()
       if (this.contenido === null) {
         this.contenido = new Contenido
-        this.categorias = await this.buscarCategorias()
+      } else {
+        let categorias_checked = await this.categoriasContenido(this.contenido.idContenido)
+
+        this.categorias.forEach( (item, index) => {
+          categorias_checked.forEach( (item_checked, index_checked) => {
+            if(item["idCategoria"] == item_checked["idCategoria"]) item["checked"] = true
+          })
+        })
       }
     } catch (error) {
       mostrarError(this, error)
@@ -106,6 +114,10 @@ export class AgregarModificarComponent implements OnInit {
     })
 
     return categorias
+  }
+
+  async categoriasContenido(id: String) {
+    return await this.abmService.categoriasContenido(id)
   }
 
   categoriasSeleccionadas: String[] = []
