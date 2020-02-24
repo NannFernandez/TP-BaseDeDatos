@@ -20,7 +20,7 @@
       <div class="modal-header primary-color white-text">
         <h4 class="title">
           <i class="fa fa-pencil-alt"></i> Gestión de archivos</h4>
-        <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+        <button (click)="onCancel()" type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>
@@ -67,7 +67,7 @@
             [disabled]="!archivoForm.valid && (porcentaje > 0 && porcentaje < 100)" *ngIf="habilitado()">Subir
             archivo</button>
 
-          <button (click)=printContenido($event) class="btn btn-sm btn-secondary">Test</button>
+    
 
           <!-- <span>{{url | async}}</span> -->
           <div class="progress">

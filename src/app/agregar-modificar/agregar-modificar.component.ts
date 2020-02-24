@@ -45,13 +45,16 @@ export class AgregarModificarComponent implements OnInit {
   habilitadoSubir: boolean = true;
   habilitadoExaminar: boolean = false;
   hoy: Date = new Date
+  categoriasSeleccionadas: String[] = []
   categorias: any = []
 
   async ngOnInit() {
     try {
+      
       this.categorias = await this.buscarCategorias()
       if (this.contenido === null) {
         this.contenido = new Contenido
+        this.categorias = await this.buscarCategorias()
       } else {
         let categorias_checked = await this.categoriasContenido(this.contenido.idContenido)
 
@@ -64,6 +67,15 @@ export class AgregarModificarComponent implements OnInit {
     } catch (error) {
       mostrarError(this, error)
     }
+  }
+
+  async buscarCategorias() {
+    let categorias = await this.abmService.categorias()
+    categorias.forEach( (item, index) => {
+      item["checked"] = false
+    })
+
+    return categorias
   }
 
   prepareUpload(e) {
@@ -94,33 +106,12 @@ export class AgregarModificarComponent implements OnInit {
   }
 
 
-  // categorias: any = [
-  //     {"nombre": "Deportes", "id": "201", "checked": false},
-  //     {"nombre": "Salud", "id": "202", "checked": false},
-  //     {"nombre": "Economia", "id": "203", "checked": false},
-  //     {"nombre": "Crimen", "id": "204", "checked": false},
-  //     {"nombre": "Politica", "id": "205", "checked": false},
-  //     {"nombre": "Ciencia", "id": "206", "checked": false},
-  //     {"nombre": "Filosofia", "id": "207", "checked": false},
-  //     {"nombre": "Musica", "id": "208", "checked": false},
-  //     {"nombre": "Entretenimientos", "id": "209", "checked": false},
-  //     {"nombre": "Otros", "id": "210", "checked": false}
-  //   ]
+ 
 
-  async buscarCategorias() {
-    let categorias = await this.abmService.categorias()
-    categorias.forEach( (item, index) => {
-      item["checked"] = false
-    })
+  
 
-    return categorias
-  }
+  
 
-  async categoriasContenido(id: String) {
-    return await this.abmService.categoriasContenido(id)
-  }
-
-  categoriasSeleccionadas: String[] = []
 
   checkCategoria(event) {
     let catId: string = (event.target as Element).id;
@@ -132,7 +123,8 @@ export class AgregarModificarComponent implements OnInit {
       this.eliminarCategoria(catId)
     }
 
-    this.contenido.categorias = this.categoriasSeleccionadas
+    this.contenido.listaCategorias = this.categoriasSeleccionadas
+    console.log(this.categoriasSeleccionadas)
   }
 
   eliminarCategoria(cat) {
@@ -144,6 +136,11 @@ export class AgregarModificarComponent implements OnInit {
   agregarCategoria(cat) {
    this.categoriasSeleccionadas.push(cat)
   }
+
+  async categoriasContenido(id: String) {
+    return await this.abmService.categoriasContenido(id)
+  }
+
 
   printContenido(event) {
     console.log(this.contenido)
@@ -167,6 +164,7 @@ export class AgregarModificarComponent implements OnInit {
     var hoy = new Date('2020-12-31').toISOString().slice(0, 10);
     return hoy
   }
+  
 
 
   extensiones: any = extensiones
@@ -186,10 +184,11 @@ export class AgregarModificarComponent implements OnInit {
 
   }
 
-  // categoriaChecked(id: number) {
-  //   console.log(id)
-  //   this.categoriasSeleccionadas.includes(id)
-  // }
+   categoriaChecked(id: String) {
+     console.log(id)
+     console.log(this.habilitadoExaminar,this.habilitadoSubir)
+    this.categoriasSeleccionadas.includes(id)
+   }
 
   fileProgress() {
     console.log(this.inputArchivo)
@@ -236,6 +235,7 @@ export class AgregarModificarComponent implements OnInit {
     this.habilitadoSubir = true
     this.habilitadoExaminar = false
     this.contenido.fechaPublicacion = this.hoy.toISOString().slice(0, 10);
+    this.contenido.listaCategorias=this.categoriasSeleccionadas
     this.refrescar()
 
   }
@@ -252,9 +252,6 @@ export class AgregarModificarComponent implements OnInit {
     if (this.file !== undefined) {
       this.habilitadoExaminar = true
     }
-
-    console.log(this.habilitadoSubir, this.habilitadoExaminar, this.dir,
-      this.contenido.fechaPublicacion,this.hoy.getDate().toString() + (this.hoy.getMonth() + 1).toString(), this.hoy.getFullYear().toString()+'-'+(this.hoy.getMonth() + 1).toString() +'-'+this.hoy.getDate().toString())
     return this.habilitadoSubir && this.habilitadoExaminar
   }
 
@@ -262,16 +259,21 @@ export class AgregarModificarComponent implements OnInit {
 
   onCancel() {
 
+ console.log(this.habilitadoExaminar,this.habilitadoSubir)
     this.deleteFile
     this.habilitadoSubir = true
     this.habilitadoExaminar = false
+    console.log(this.habilitadoExaminar,this.habilitadoSubir,this.poderGuardar)
     this.refrescar()
   }
 
   poderGuardar() {
+    console.log(this.contenido)
   if  (this.contenido.titulo !== undefined  && this.contenido.extensionArchivo !== undefined
     && this.contenido.titulo!=='' && this.contenido.extensionArchivo !=='')
     return true
     else return false
+
+    
   }
 }

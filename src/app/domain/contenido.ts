@@ -6,7 +6,7 @@ export class Contenido {
     fechaPublicacion: String
     extensionArchivo: String  = ''
     url: String = 'asdasdasd'
-    categorias: String[] = []
+    listaCategorias: String[] = []
     hoy: Date= new Date
 
 

@@ -47,6 +47,7 @@ async categoriasContenido(id: String) {
 
     return this.http.put(REST_SERVER_URL + '/contenidos' +'/borrar/' + contenido.idContenido, contenido.toJSON()).toPromise()
 
+    
  }
 
 }
