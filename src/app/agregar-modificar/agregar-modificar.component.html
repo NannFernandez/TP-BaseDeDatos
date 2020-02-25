@@ -48,7 +48,7 @@
 
         <br />
 
-        <div class="form-check" *ngFor="let categ of categorias">
+        <div class="form-check" *ngFor="let categ of categoriasContenido(contenido)">
           <input (click)=checkCategoria($event) type="checkbox" class="form-check-input" id="{{categ.idCategoria}}" [(ngModel)]="categ.checked">
           <label class="form-check-label" for="cat1">{{categ.descCategoria}}</label>
         </div>
@@ -67,7 +67,7 @@
             [disabled]="!archivoForm.valid && (porcentaje > 0 && porcentaje < 100)" *ngIf="habilitado()">Subir
             archivo</button>
 
-    
+
 
           <!-- <span>{{url | async}}</span> -->
           <div class="progress">
@@ -88,7 +88,7 @@
 
         <ng-template #btnDisabled>
 
-          <button class="btn btn-primary " (click)="onSubmit()" data-dismiss="modal" disabled="true">Guardar</button>
+          <button class="btn btn-primary disabled" (click)="onSubmit()" data-dismiss="modal" disabled="true">Guardar</button>
 
         </ng-template>
         <button class="btn btn-danger " (click)="onCancel()" data-dismiss="modal">Cancelar</button>

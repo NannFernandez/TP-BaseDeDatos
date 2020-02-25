@@ -29,6 +29,10 @@ function mostrarError(component, error) {
 })
 export class AgregarModificarComponent implements OnInit {
 
+  constructor(private http: HttpClient, private abmService: AbmService, private router: Router, private storage: AngularFireStorage) {
+
+  }
+
   public archivoForm = new FormGroup({
     archivo: new FormControl(null, Validators.required),
   });
@@ -48,25 +52,40 @@ export class AgregarModificarComponent implements OnInit {
   categoriasSeleccionadas: String[] = []
   categorias: any = []
 
+  extensiones: any = extensiones
+  // categorias: Categoria[] = [new Categoria('201', 'Deportes'), new Categoria('202', 'Economia'), new Categoria('203', 'Crimen')
+  //   , new Categoria('204', 'Politica'), new Categoria('205', 'Ciencia'), new Categoria('207', 'Filosofia')
+  //   , new Categoria('208', 'Musica'), new Categoria('209', 'Entretenimiento'), new Categoria('210', 'Otros')]
+
+  extensionSeleccionada: number = 0
+  inputArchivo: any = null
+
+  fileData: File = null;
+  previewUrl: any = null;
+  fileUploadProgress: string = null;
+  uploadedFilePath: string = null;
+
   async ngOnInit() {
     try {
-      
+      this.onCancel()
       this.categorias = await this.buscarCategorias()
       if (this.contenido === null) {
         this.contenido = new Contenido
-        this.categorias = await this.buscarCategorias()
-      } else {
-        let categorias_checked = await this.categoriasContenido(this.contenido.idContenido)
-
-        this.categorias.forEach( (item, index) => {
-          categorias_checked.forEach( (item_checked, index_checked) => {
-            if(item["idCategoria"] == item_checked["idCategoria"]) item["checked"] = true
-          })
-        })
       }
     } catch (error) {
       mostrarError(this, error)
     }
+  }
+
+  categoriasContenido(contenido: Contenido) {
+    let categorias_contenido = contenido.listaCategorias
+    let categorias = this.categorias
+
+    categorias.forEach( (item, index) => {
+      if(categorias_contenido.includes(item["idCategoria"])) item["checked"] = true
+    })
+
+    return categorias
   }
 
   async buscarCategorias() {
@@ -105,14 +124,6 @@ export class AgregarModificarComponent implements OnInit {
     this.contenido.extensionArchivo = this.file.name.substring(this.file.name.length - 3, this.file.name.length)
   }
 
-
- 
-
-  
-
-  
-
-
   checkCategoria(event) {
     let catId: string = (event.target as Element).id;
     let checked = event.target.checked
@@ -137,10 +148,9 @@ export class AgregarModificarComponent implements OnInit {
    this.categoriasSeleccionadas.push(cat)
   }
 
-  async categoriasContenido(id: String) {
-    return await this.abmService.categoriasContenido(id)
-  }
-
+  // async categoriasContenido(id: String) {
+  //   return await this.abmService.categoriasContenido(id)
+  // }
 
   printContenido(event) {
     console.log(this.contenido)
@@ -164,27 +174,8 @@ export class AgregarModificarComponent implements OnInit {
     var hoy = new Date('2020-12-31').toISOString().slice(0, 10);
     return hoy
   }
-  
 
-
-  extensiones: any = extensiones
-  // categorias: Categoria[] = [new Categoria('201', 'Deportes'), new Categoria('202', 'Economia'), new Categoria('203', 'Crimen')
-  //   , new Categoria('204', 'Politica'), new Categoria('205', 'Ciencia'), new Categoria('207', 'Filosofia')
-  //   , new Categoria('208', 'Musica'), new Categoria('209', 'Entretenimiento'), new Categoria('210', 'Otros')]
-
-  extensionSeleccionada: number = 0
-  inputArchivo: any = null
-
-  fileData: File = null;
-  previewUrl: any = null;
-  fileUploadProgress: string = null;
-  uploadedFilePath: string = null;
-
-  constructor(private http: HttpClient, private abmService: AbmService, private router: Router, private storage: AngularFireStorage) {
-
-  }
-
-   categoriaChecked(id: String) {
+  categoriaChecked(id: String) {
      console.log(id)
      console.log(this.habilitadoExaminar,this.habilitadoSubir)
     this.categoriasSeleccionadas.includes(id)
@@ -222,12 +213,14 @@ export class AgregarModificarComponent implements OnInit {
     this.habilitacion = true
     if (this.contenido.idContenido != null) {
       this.contenido.url = this.dir
+      this.contenido.listaCategorias=this.categoriasSeleccionadas
       await this.abmService.modificarArchivo(this.contenido)
       this.router.routeReuseStrategy.shouldReuseRoute = () => false
 
     } else {
 
       this.contenido.url = this.dir
+      this.contenido.listaCategorias=this.categoriasSeleccionadas
       await this.abmService.agregarArchivo(this.contenido)
       this.router.routeReuseStrategy.shouldReuseRoute = () => false
     }
@@ -235,7 +228,6 @@ export class AgregarModificarComponent implements OnInit {
     this.habilitadoSubir = true
     this.habilitadoExaminar = false
     this.contenido.fechaPublicacion = this.hoy.toISOString().slice(0, 10);
-    this.contenido.listaCategorias=this.categoriasSeleccionadas
     this.refrescar()
 
   }
@@ -247,7 +239,6 @@ export class AgregarModificarComponent implements OnInit {
 
   }
 
-
   habilitado() {
     if (this.file !== undefined) {
       this.habilitadoExaminar = true
@@ -255,11 +246,8 @@ export class AgregarModificarComponent implements OnInit {
     return this.habilitadoSubir && this.habilitadoExaminar
   }
 
-
-
   onCancel() {
-
- console.log(this.habilitadoExaminar,this.habilitadoSubir)
+    console.log(this.habilitadoExaminar,this.habilitadoSubir)
     this.deleteFile
     this.habilitadoSubir = true
     this.habilitadoExaminar = false
@@ -268,12 +256,11 @@ export class AgregarModificarComponent implements OnInit {
   }
 
   poderGuardar() {
-    console.log(this.contenido)
-  if  (this.contenido.titulo !== undefined  && this.contenido.extensionArchivo !== undefined
-    && this.contenido.titulo!=='' && this.contenido.extensionArchivo !=='')
-    return true
-    else return false
-
-    
+    // console.log(this.contenido)
+    if  (this.contenido.titulo !== undefined  && this.contenido.extensionArchivo !== undefined
+        && this.contenido.titulo!=='' && this.contenido.extensionArchivo !=='')
+      return true
+      else return false
   }
+
 }
