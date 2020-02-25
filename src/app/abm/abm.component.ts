@@ -40,14 +40,14 @@ export class AbmComponent implements OnInit {
   }
 
   async seleccionarArchivo(contenido: Contenido) {
-      if (contenido === null) {
+    console.log(contenido)
+    if (contenido === null) {
       this.archivoSeleccionado = new Contenido
-      
+
     } else {
-      var copy = Object.assign(new Contenido,contenido);
-      
+      var copy = Object.assign(new Contenido, contenido);
+
       this.archivoSeleccionado = copy
-      
 
     }
   }
@@ -57,9 +57,9 @@ export class AbmComponent implements OnInit {
     return formato.extension
   }
  async borrar (contenido: Contenido){
-  
-    await this.abmService.borrarArchivo(contenido)   
-    this.contenidos = await 
+
+    await this.abmService.borrarArchivo(contenido)
+    this.contenidos = await
     this.abmService.contenidos()
     // no actualiza la vista
    }
