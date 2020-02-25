@@ -39,6 +39,7 @@ export class AgregarModificarComponent implements OnInit {
 
   @Input() contenido: Contenido
   dir: String = ''
+  dirVieja: String = ''
   x: number;
   habilitacion: boolean = true
   porcentaje: Observable<number>
@@ -67,7 +68,7 @@ export class AgregarModificarComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      this.onCancel()
+      
       this.categorias = await this.buscarCategorias()
       if (this.contenido === null) {
         this.contenido = new Contenido
