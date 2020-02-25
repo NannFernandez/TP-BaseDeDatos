@@ -68,7 +68,6 @@ export class AgregarModificarComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      
       this.categorias = await this.buscarCategorias()
       if (this.contenido === null) {
         this.contenido = new Contenido
