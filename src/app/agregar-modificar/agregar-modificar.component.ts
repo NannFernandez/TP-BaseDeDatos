@@ -54,9 +54,6 @@ export class AgregarModificarComponent implements OnInit {
   categorias: any = []
 
   extensiones: any = extensiones
-  // categorias: Categoria[] = [new Categoria('201', 'Deportes'), new Categoria('202', 'Economia'), new Categoria('203', 'Crimen')
-  //   , new Categoria('204', 'Politica'), new Categoria('205', 'Ciencia'), new Categoria('207', 'Filosofia')
-  //   , new Categoria('208', 'Musica'), new Categoria('209', 'Entretenimiento'), new Categoria('210', 'Otros')]
 
   extensionSeleccionada: number = 0
   inputArchivo: any = null
@@ -117,7 +114,7 @@ export class AgregarModificarComponent implements OnInit {
     this.habilitadoSubir = false
     const id = Math.random().toString(36).substring(2)
     this.urlPath = `uploads/${id}`
-    this.dir = id
+    // this.dir = id
     const ref = this.storage.ref(this.urlPath)
 
     console.log(`URL del archivo: ${this.urlPath}`)
@@ -126,10 +123,13 @@ export class AgregarModificarComponent implements OnInit {
     this.porcentaje = task.percentageChanges()
     task.snapshotChanges().pipe(finalize(
       () => {
+        this.contenido.url = encodeURIComponent(this.urlPath)
         this.downloadUrl = ref.getDownloadURL()
         this.downloadUrl.subscribe(url => (this.urlReal = url))
       })
     ).subscribe()
+
+    // this.contenido.url = this.dir
 
   }
 
@@ -148,9 +148,12 @@ export class AgregarModificarComponent implements OnInit {
   }
 
   eliminarCategoria(cat) {
-   this.categoriasSeleccionadas.forEach( (item, index) => {
-     if(item === cat) this.categoriasSeleccionadas.splice(index,1)
-   })
+    let categs_tmp = [...this.categoriasSeleccionadas]
+
+    categs_tmp.forEach( (item, index) => {
+      if(item === cat) this.categoriasSeleccionadas.splice(index,1)
+    })
+
   }
 
   agregarCategoria(cat) {
@@ -179,12 +182,6 @@ export class AgregarModificarComponent implements OnInit {
     var hoy = new Date('2020-12-31').toISOString().slice(0, 10);
     return hoy
   }
-
-  categoriaChecked(id: String) {
-     console.log(id)
-     console.log(this.habilitadoExaminar,this.habilitadoSubir)
-    this.categoriasSeleccionadas.includes(id)
-   }
 
   fileProgress() {
     console.log(this.inputArchivo)
@@ -217,15 +214,15 @@ export class AgregarModificarComponent implements OnInit {
       })*/
     this.habilitacion = true
     if (this.contenido.idContenido != null) {
-      this.contenido.url = this.dir
-      this.contenido.listaCategorias=this.categoriasSeleccionadas
+      // this.contenido.url = this.dir
+      // this.contenido.listaCategorias=this.categoriasSeleccionadas
       await this.abmService.modificarArchivo(this.contenido)
       this.router.routeReuseStrategy.shouldReuseRoute = () => false
 
     } else {
 
-      this.contenido.url = this.dir
-      this.contenido.listaCategorias=this.categoriasSeleccionadas
+      // this.contenido.url = this.dir
+      // this.contenido.listaCategorias=this.categoriasSeleccionadas
       await this.abmService.agregarArchivo(this.contenido)
       this.router.routeReuseStrategy.shouldReuseRoute = () => false
     }
@@ -262,7 +259,7 @@ export class AgregarModificarComponent implements OnInit {
   }
 
   poderGuardar() {
-    return (this.contenido.titulo && this.contenido.extensionArchivo)
+    return (this.contenido.titulo && this.contenido.extensionArchivo && this.contenido.url)
   }
 
 }

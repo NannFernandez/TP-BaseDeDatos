@@ -17,7 +17,7 @@
           <td class="editable" (click)="seleccionarArchivo(contenido)" data-toggle="modal" data-target="#amModal"><i class="far fa-edit lapicito"></i> {{contenido.titulo}}</td>
           <td>{{contenido.fechaPublicacion}}</td>
           <td>{{contenido.extensionArchivo}}</td>
-          <td>gs://fir-base-datos-unsam.appspot.com/uploads/{{contenido.url}}</td>
+          <td><a class="btn-link" href="https://firebasestorage.googleapis.com/v0/b/fir-base-datos-unsam.appspot.com/o/{{contenido.url}}?alt=media">link</a></td>
           <td (click)="borrar(contenido)"><i class="fas fa-trash-alt tachito"></i></td>
         </tr>
       </tbody>

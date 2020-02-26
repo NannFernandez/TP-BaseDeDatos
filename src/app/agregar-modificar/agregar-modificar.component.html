@@ -54,7 +54,7 @@
         </div>
         <br>
 
-        <div class="form-group">
+        <div *ngIf="contenido.idContenido === undefined" class="form-group">
 
           <input type="file" (change)=prepareUpload($event) accept=".doc, .pdf, .wav, .mp3, .txt" *ngIf="habilitadoSubir">
           <br>
@@ -84,7 +84,7 @@
 
 
       <div class="modal-footer ">
-        <button class="btn btn-primary " (click)="onSubmit()" data-dismiss="modal" *ngIf="poderGuardar() && downloadUrl | async ; else btnDisabled">Guardar</button>
+        <button class="btn btn-primary " (click)="onSubmit()" data-dismiss="modal" *ngIf="poderGuardar(); else btnDisabled">Guardar</button>
 
         <ng-template #btnDisabled>
 

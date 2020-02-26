@@ -40,15 +40,18 @@ export class AbmComponent implements OnInit {
   }
 
   async seleccionarArchivo(contenido: Contenido) {
-    console.log(contenido)
     if (contenido === null) {
       this.archivoSeleccionado = new Contenido
       this.archivoSeleccionado.titulo = ''
 
     } else {
+
+      contenido = await this.abmService.getContenido(contenido.idContenido)
+
       var copy = Object.assign(new Contenido, contenido);
 
       this.archivoSeleccionado = copy
+      // console.log(contenido.listaCategorias)
 
     }
   }
