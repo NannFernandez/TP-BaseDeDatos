@@ -169,8 +169,10 @@ export class AgregarModificarComponent implements OnInit {
   }
 
   deleteFile() {
-    const ref = this.storage.ref(this.urlPath)
-    ref.delete()
+    if (this.urlPath) {
+      const ref = this.storage.ref(this.urlPath)
+      ref.delete()
+    }
   }
 
   get minimo() {
@@ -229,13 +231,17 @@ export class AgregarModificarComponent implements OnInit {
 
     this.habilitadoSubir = true
     this.habilitadoExaminar = false
-    this.contenido.fechaPublicacion = this.hoy.toISOString().slice(0, 10);
+    this.contenido.fechaPublicacion = this.hoy.toISOString().slice(0, 10)
+
+    this.categorias = await this.buscarCategorias()
     this.refrescar()
 
   }
 
   refrescar() {
-    // this.contenido = null
+    setTimeout(function(){
+        console.log("Cargando...")
+    }, 200)
     this.router.navigateByUrl("/botonera",
       { skipLocationChange: true })
       .then(() => this.router.navigate(["/abm"]))
