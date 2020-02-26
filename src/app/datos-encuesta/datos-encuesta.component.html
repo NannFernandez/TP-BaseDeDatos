@@ -31,7 +31,12 @@
 
          
     </div>
-    <div class="col-sm"><br><br><br><button type="sumbit" class="btn btn-success btn-lg" (click)=encuestas()>Buscar</button></div>
+    <div class="col-sm"><br><br><br><button type="sumbit" class="btn btn-success btn-lg" (click)=encuestas() *ngIf="poderBuscar(); else btnDisabled">Buscar</button>
+      <ng-template #btnDisabled>
+
+        <button type="sumbit" class="btn btn-success btn-lg disabled" (click)=encuestas() disabled="true">Buscar</button>
+        
+      </ng-template></div>
   </div>
 
 </div>

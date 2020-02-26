@@ -54,6 +54,15 @@ export class DatosEncuestaComponent implements OnInit {
   return fecha.substring(0,4) + fecha.substring(5,7) + fecha.substring(8,10)
  }
 
- 
+ poderBuscar(){
+  console.log(this.desde,this.hasta)
+   if ((this.tipoQuery === 'PTJ_ASC' || this.tipoQuery === 'PTJ_DESC' ||
+   this.tipoQuery === 'ENC_DESC' || this.tipoQuery === 'ENC_ASC') && this.registros>0 && 
+   this.desde!==undefined && this.hasta!==undefined && this.desde!=='' && this.hasta!==''){
+     return true
+   }else {
+     return false
+   }
+ }
 
 }

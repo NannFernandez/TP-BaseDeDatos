@@ -23,11 +23,18 @@
 
     </div>
     <div class="col-sm">
-      <button type="sumbit" class="btn btn-success btn-lg" (click)=categorias()>Buscar</button>
+      <button type="sumbit" class="btn btn-success btn-lg" (click)=categorias() *ngIf="poderBuscar(); else btnDisabled">Buscar</button>
+      <ng-template #btnDisabled>
+
+        <button type="sumbit" class="btn btn-success btn-lg disabled" (click)=categorias() disabled="true">Buscar</button>
+        
+      </ng-template>
     </div>
   </div>
 </div>
 
+
+        
 
 <div class="table-wrapper-scroll-y my-custom-scrollbar">
 
