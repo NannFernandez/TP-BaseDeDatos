@@ -64,5 +64,5 @@ export class DatosEncuestaComponent implements OnInit {
      return false
    }
  }
-
+ 
 }
