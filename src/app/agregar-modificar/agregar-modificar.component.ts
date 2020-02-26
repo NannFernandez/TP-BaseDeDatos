@@ -79,11 +79,15 @@ export class AgregarModificarComponent implements OnInit {
 
   categoriasContenido(contenido: Contenido) {
     let categorias_contenido = contenido.listaCategorias
-    let categorias = this.categorias
+
+    this.clearCategorias()
+    let categorias = [...this.categorias]
 
     categorias.forEach( (item, index) => {
       if(categorias_contenido.includes(item["idCategoria"])) item["checked"] = true
     })
+
+    this.categoriasSeleccionadas = [...contenido.listaCategorias]
 
     return categorias
   }
@@ -97,9 +101,16 @@ export class AgregarModificarComponent implements OnInit {
     return categorias
   }
 
+  clearCategorias() {
+    this.categorias.forEach( (item, index) => {
+      item["checked"] = false
+    })
+  }
+
   prepareUpload(e) {
     this.habilitacion = false
     this.file = e.target.files[0]
+    this.contenido.extensionArchivo = this.file.name.split(".").pop()
   }
 
   uploadFile() {
@@ -120,8 +131,6 @@ export class AgregarModificarComponent implements OnInit {
       })
     ).subscribe()
 
-
-    this.contenido.extensionArchivo = this.file.name.substring(this.file.name.length - 3, this.file.name.length)
   }
 
   checkCategoria(event) {
@@ -134,8 +143,8 @@ export class AgregarModificarComponent implements OnInit {
       this.eliminarCategoria(catId)
     }
 
-    this.contenido.listaCategorias = this.categoriasSeleccionadas
-    console.log(this.categoriasSeleccionadas)
+    this.contenido.listaCategorias = [...this.categoriasSeleccionadas]
+    // console.log(this.categoriasSeleccionadas)
   }
 
   eliminarCategoria(cat) {
@@ -147,10 +156,6 @@ export class AgregarModificarComponent implements OnInit {
   agregarCategoria(cat) {
    this.categoriasSeleccionadas.push(cat)
   }
-
-  // async categoriasContenido(id: String) {
-  //   return await this.abmService.categoriasContenido(id)
-  // }
 
   printContenido(event) {
     console.log(this.contenido)
@@ -233,6 +238,7 @@ export class AgregarModificarComponent implements OnInit {
   }
 
   refrescar() {
+    // this.contenido = null
     this.router.navigateByUrl("/botonera",
       { skipLocationChange: true })
       .then(() => this.router.navigate(["/abm"]))
@@ -247,20 +253,16 @@ export class AgregarModificarComponent implements OnInit {
   }
 
   onCancel() {
-    console.log(this.habilitadoExaminar,this.habilitadoSubir)
-    this.deleteFile
+    // console.log(this.habilitadoExaminar,this.habilitadoSubir)
+    this.deleteFile()
     this.habilitadoSubir = true
     this.habilitadoExaminar = false
-    console.log(this.habilitadoExaminar,this.habilitadoSubir,this.poderGuardar)
+    // console.log(this.habilitadoExaminar,this.habilitadoSubir,this.poderGuardar)
     this.refrescar()
   }
 
   poderGuardar() {
-    // console.log(this.contenido)
-    if  (this.contenido.titulo !== undefined  && this.contenido.extensionArchivo !== undefined
-        && this.contenido.titulo!=='' && this.contenido.extensionArchivo !=='')
-      return true
-      else return false
+    return (this.contenido.titulo && this.contenido.extensionArchivo)
   }
 
 }

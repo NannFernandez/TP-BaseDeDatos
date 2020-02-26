@@ -54,9 +54,9 @@
         </div>
         <br>
 
-        <div class="from-group">
+        <div class="form-group">
 
-          <input type="file" (change)=prepareUpload($event) accept=".doc, .pdf, .wav, .mpr3, .txt" *ngIf="habilitadoSubir">
+          <input type="file" (change)=prepareUpload($event) accept=".doc, .pdf, .wav, .mp3, .txt" *ngIf="habilitadoSubir">
           <br>
 
           <progress *ngIf="porcentaje > 0 && porcentaje < 100" class="progress is-large is-success"
