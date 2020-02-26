@@ -27,5 +27,14 @@ export class DatosDescargaComponent implements OnInit {
       this.lista = await this.descargaService.velTransfDesc(this.registros)}
    }
 
+   poderBuscar(){
+    console.log(this.tipoQuery)
+     if ((this.tipoQuery === 'ASC' || this.tipoQuery === 'DESC') && this.registros>0){
+       return true
+     }else {
+       return false
+     }
+   }
+
 
 }

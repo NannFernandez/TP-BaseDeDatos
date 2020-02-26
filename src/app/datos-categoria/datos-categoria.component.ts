@@ -12,7 +12,7 @@ import { CategoriasService } from '../services/categorias.service';
 export class DatosCategoriaComponent implements OnInit {
   lista: DatosCategoria[]
   registros: number
-  tipoQuery: any
+  tipoQuery: any =''
 
 
   constructor(private http: HttpClient, private categoriasService: CategoriasService, private router: Router) { }
@@ -34,6 +34,16 @@ export class DatosCategoriaComponent implements OnInit {
     }
     if (this.tipoQuery === 'EDAD_DESC') {
       this.lista = await this.categoriasService.velEdadMediaDesc(this.registros)
+    }
+  }
+
+  poderBuscar(){
+   console.log(this.tipoQuery)
+    if ((this.tipoQuery === 'TRANSF_ASC' || this.tipoQuery === 'TRANSF_DESC'||
+    this.tipoQuery === 'EDAD_ASC' || this.tipoQuery === 'EDAD_DESC')&&this.registros>0){
+      return true
+    }else {
+      return false
     }
   }
 }
